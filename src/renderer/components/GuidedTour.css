@@ -1,0 +1,145 @@
+/* GuidedTour - 新手引导：全屏黑遮罩 + 指引卡 + 箭头（置于一切弹窗之上） */
+.gt-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  z-index: 9000;
+  animation: gt-fade 0.25s ease;
+}
+
+@keyframes gt-fade {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.gt-card {
+  position: absolute;
+  background: var(--color-panel, #fff);
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 12px;
+  padding: 18px 18px 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  animation: gt-rise 0.3s ease;
+}
+
+@keyframes gt-rise {
+  from {opacity: 0; transform: translateY(8px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+.gt-progress {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-accent, #2563eb);
+  letter-spacing: 0.08em;
+}
+
+.gt-title {
+  margin: 6px 0 6px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-primary, #111827);
+}
+
+.gt-body {
+  margin: 0 0 14px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--color-text-secondary, #4b5563);
+}
+
+.gt-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  /* 有主行动按钮时与它保持间距并加分隔线（否则下一步紧贴大按钮下缘，视觉上重叠） */
+  border-top: 1px solid var(--color-border, #e5e7eb);
+  margin-top: 12px;
+  padding-top: 10px;
+}
+
+.gt-actions-right {
+  display: flex;
+  gap: 8px;
+}
+
+.gt-btn {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border, #e5e7eb);
+  background: transparent;
+  color: var(--color-text-secondary, #4b5563);
+  cursor: pointer;
+}
+
+.gt-btn:hover {
+  border-color: var(--color-accent, #2563eb);
+  color: var(--color-accent, #2563eb);
+}
+
+.gt-skip {
+  border: none;
+  padding-left: 0;
+}
+
+.gt-next {
+  background: var(--color-accent, #2563eb);
+  border-color: var(--color-accent, #2563eb);
+  color: #fff;
+}
+
+.gt-next:hover {
+  color: #fff;
+  filter: brightness(1.08);
+}
+
+/* 箭头（卡片边缘指向目标元素） */
+.gt-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+/* 箭头在卡片顶边、朝上指（目标在卡片上方） */
+.gt-arrow-up {
+  top: -10px;
+  transform: translateX(-10px);
+  border-bottom: 10px solid var(--color-panel, #fff);
+  filter: drop-shadow(0 -1px 0 var(--color-border, #e5e7eb));
+}
+
+/* 箭头在卡片底边、朝下指（目标在卡片下方） */
+.gt-arrow-down {
+  bottom: -10px;
+  transform: translateX(-10px);
+  border-top: 10px solid var(--color-panel, #fff);
+  filter: drop-shadow(0 1px 0 var(--color-border, #e5e7eb));
+}
+
+/* 带做主行动按钮：比「下一步」更醒目，占整行 */
+.gt-action {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-accent, #2563eb);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.gt-action:hover {
+  opacity: 0.9;
+}
+.gt-action:disabled {
+  opacity: 0.55;
+  cursor: default;
+}

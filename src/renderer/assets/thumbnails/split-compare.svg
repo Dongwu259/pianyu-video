@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <rect width="320" height="180" rx="8" fill="#1A1A2E"/>
+  <defs>
+    <clipPath id="frameClip"><rect x="16" y="24" width="288" height="132" rx="10"/></clipPath>
+  </defs>
+  <rect x="16" y="24" width="288" height="132" rx="10" fill="#16213E" stroke="#334155" stroke-width="2"/>
+  <g clip-path="url(#frameClip)">
+    <rect x="16" y="24" width="144" height="132" fill="#2563EB" opacity="0.25"/>
+  </g>
+  <line x1="160" y1="24" x2="160" y2="156" stroke="#FFFFFF" stroke-width="4"/>
+  <circle cx="160" cy="90" r="14" fill="#FFFFFF"/>
+  <polygon points="155,84 147,90 155,96" fill="#1A1A2E"/>
+  <polygon points="165,84 173,90 165,96" fill="#1A1A2E"/>
+</svg>

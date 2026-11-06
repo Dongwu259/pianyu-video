@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#6366F1"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.3" cy="0.22" r="0.8">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.22"/>
+      <stop offset="0.55" stop-color="#FFFFFF" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- 圆角方底 + 顶部高光 -->
+  <rect width="1024" height="1024" rx="228" ry="228" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="228" ry="228" fill="url(#glow)"/>
+  <!-- 分段播放:白色播放三角切成 3 段叠片,段间 26px 间隙 -->
+  <g fill="#FFFFFF">
+    <polygon points="380,300 602.3,424 380,424"/>
+    <polygon points="380,450 648.9,450 760,512 648.9,574 380,574"/>
+    <polygon points="380,600 602.3,600 380,724"/>
+    <!-- AI 四角星(大) -->
+    <polygon points="790,378 801.1,418.9 842,430 801.1,441.1 790,482 778.9,441.1 738,430 778.9,418.9" fill-opacity="0.92"/>
+    <!-- AI 四角星(小) -->
+    <polygon points="720,296 725.1,314.9 744,320 725.1,325.1 720,344 714.9,325.1 696,320 714.9,314.9" fill-opacity="0.8"/>
+  </g>
+</svg>

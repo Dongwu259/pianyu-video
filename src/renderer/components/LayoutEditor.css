@@ -1,0 +1,241 @@
+/* ====== LayoutEditor 布局编辑器 ====== */
+
+.layout-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 100%;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.layout-section {
+  background: var(--color-surface);
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+}
+
+.layout-section h4 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* 滑块行 */
+.layout-slider-row {
+  margin-bottom: 10px;
+}
+
+.layout-slider-row:last-child {
+  margin-bottom: 0;
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.slider-label {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.slider-value {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-reset {
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.btn-reset:hover {
+  color: var(--color-accent);
+}
+
+.layout-slider {
+  width: 100%;
+  height: 5px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: linear-gradient(90deg, var(--color-accent), #60a5fa);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.layout-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-panel);
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+/* 比例预设 */
+.aspect-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.aspect-preset-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-panel);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.aspect-preset-btn:hover {
+  border-color: #93C5FD;
+}
+
+.aspect-preset-btn.active {
+  background: var(--color-accent-light);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* 自定义比例输入 */
+.custom-aspect-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.custom-aspect-input input {
+  width: 60px;
+  padding: 4px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 12px;
+  text-align: center;
+  color: var(--color-text-primary);
+}
+
+.custom-aspect-input span {
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+/* 自定义分辨率 */
+.custom-resolution {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.res-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.res-input-group label {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.res-input-group input {
+  padding: 6px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--color-text-primary);
+  background: var(--color-panel);
+  width: 100%;
+}
+
+.res-input-group input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.res-sep {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  padding-bottom: 6px;
+}
+
+/* 清除按钮 */
+.btn-clear-ascript,
+.btn-clear-aspect {
+  margin-top: 8px;
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  font-size: 11px;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 4px 0;
+}
+
+.btn-clear-aspect:hover {
+  color: #DC2626;
+}
+
+/* 参数页：离散档位选项组（主题色/字体/驻留节奏等，替代数字滑块） */
+.param-option-row .slider-header {
+  margin-bottom: 4px;
+}
+.param-option-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.param-option-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  font-size: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-panel);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.param-option-chip:hover {
+  border-color: var(--color-accent);
+}
+.param-option-chip.on {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+.param-option-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}

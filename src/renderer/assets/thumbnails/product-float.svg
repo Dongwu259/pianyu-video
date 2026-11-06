@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <defs>
+    <radialGradient id="pfWhite" cx="50%" cy="32%" r="90%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="70%" stop-color="#EDF0F4"/>
+      <stop offset="100%" stop-color="#E2E6EC"/>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="180" rx="8" fill="#111827"/>
+  <rect x="14" y="14" width="292" height="152" rx="4" fill="url(#pfWhite)"/>
+  <!-- 悬浮窗口卡（带柔投影） -->
+  <rect x="70" y="30" width="180" height="106" rx="9" fill="#0B0F16" stroke="#7C9CFF" stroke-opacity="0.55" stroke-width="1.4"/>
+  <rect x="76" y="36" width="168" height="94" rx="6" fill="#141C2C"/>
+  <!-- 窗口内容抽象 -->
+  <rect x="88" y="50" width="64" height="8" rx="4" fill="#F8FAFC" opacity="0.5"/>
+  <rect x="88" y="66" width="100" height="6" rx="3" fill="#F8FAFC" opacity="0.22"/>
+  <rect x="88" y="80" width="84" height="6" rx="3" fill="#F8FAFC" opacity="0.16"/>
+  <circle cx="196" cy="98" r="16" fill="#7C9CFF" opacity="0.35"/>
+  <!-- 缓浮虚线轨迹 -->
+  <path d="M60 96 Q160 78 260 96" stroke="#7C9CFF" stroke-width="1.4" fill="none" stroke-dasharray="5 6" opacity="0.6"/>
+  <!-- 投影 -->
+  <ellipse cx="160" cy="148" rx="76" ry="7" fill="#0F172A" opacity="0.14"/>
+  <!-- 标题条（白境深色字） -->
+  <rect x="120" y="156" width="80" height="6" rx="3" fill="#111827" opacity="0.5"/>
+</svg>

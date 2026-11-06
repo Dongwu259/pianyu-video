@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <rect width="320" height="180" rx="8" fill="#0E1420"/>
+  <circle cx="72" cy="40" r="1.4" fill="#7FA8FF" opacity="0.6"/>
+  <circle cx="252" cy="150" r="1.4" fill="#7FA8FF" opacity="0.5"/>
+  <circle cx="284" cy="60" r="1.2" fill="#7FA8FF" opacity="0.5"/>
+  <ellipse cx="160" cy="90" rx="150" ry="82" fill="none" stroke="#3B82F6" stroke-width="3" opacity="0.28"/>
+  <ellipse cx="160" cy="90" rx="112" ry="61" fill="none" stroke="#3B82F6" stroke-width="2.6" opacity="0.4"/>
+  <ellipse cx="160" cy="90" rx="76" ry="41" fill="none" stroke="#3B82F6" stroke-width="2.2" opacity="0.55"/>
+  <ellipse cx="160" cy="90" rx="44" ry="24" fill="none" stroke="#3B82F6" stroke-width="1.8" opacity="0.75"/>
+  <ellipse cx="160" cy="90" rx="18" ry="10" fill="none" stroke="#93C5FD" stroke-width="1.5" opacity="0.95"/>
+  <ellipse cx="160" cy="90" rx="4" ry="2.4" fill="#FFFFFF"/>
+  <line x1="8" y1="24" x2="142" y2="80" stroke="#3B82F6" stroke-width="1.2" opacity="0.35"/>
+  <line x1="8" y1="156" x2="142" y2="100" stroke="#3B82F6" stroke-width="1.2" opacity="0.35"/>
+  <line x1="312" y1="24" x2="178" y2="80" stroke="#3B82F6" stroke-width="1.2" opacity="0.35"/>
+  <line x1="312" y1="156" x2="178" y2="100" stroke="#3B82F6" stroke-width="1.2" opacity="0.35"/>
+  <g transform="translate(74,86) rotate(10)">
+    <rect x="-19" y="-13" width="38" height="26" rx="3" fill="#1B2333" stroke="#3B82F6" stroke-width="1.6"/>
+    <rect x="-15" y="-9" width="30" height="15" rx="1.5" fill="#2E4A86"/>
+    <rect x="-15" y="8" width="30" height="3.2" rx="1.5" fill="#0A0F18"/>
+  </g>
+  <g transform="translate(246,92) rotate(-8)">
+    <rect x="-19" y="-13" width="38" height="26" rx="3" fill="#1B2333" stroke="#3B82F6" stroke-width="1.6"/>
+    <rect x="-12" y="-4" width="24" height="4" rx="2" fill="#F5F8FF"/>
+    <rect x="-8" y="3" width="16" height="3" rx="1.5" fill="#7FA8FF"/>
+  </g>
+</svg>

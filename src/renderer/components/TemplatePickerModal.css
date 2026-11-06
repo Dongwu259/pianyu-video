@@ -1,0 +1,318 @@
+/* TemplatePickerModal - 统一模板选择器弹窗 */
+
+/* 固定高弹窗：头部搜索 / 左侧分类轨 / 底部统计固定，仅网格区滚动。
+   网格 align-content:start + 缩略图 aspect-ratio 固定，卡片不会被 flex 收缩压瘪。 */
+.tp-modal {
+  width: 880px;
+  max-width: 94vw;
+  height: 80vh;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ====== 头部：标题 + 搜索框 ====== */
+.tp-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px 12px;
+  /* 右上角给绝对定位的 .modal-close 让位 */
+  padding-right: 48px;
+  flex-shrink: 0;
+}
+.tp-title {
+  font-size: 16px;
+  margin: 0;
+  flex-shrink: 0;
+}
+.tp-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  height: 34px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-input);
+  color: var(--color-text-secondary);
+  transition: border-color 0.15s ease;
+}
+.tp-search:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-light);
+}
+/* 输入框裸样式：焦点态由 .tp-search:focus-within 承担。
+   全局 input 规则特异度 (0,3,1)，这里用 4 类 + 元素压过它 */
+.tp-modal .tp-header .tp-search input.tp-search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  padding: 0;
+  height: 100%;
+  font-size: 13px;
+  background: transparent;
+  color: var(--color-text-primary);
+}
+.tp-modal .tp-search input.tp-search-input:focus {
+  box-shadow: none;
+}
+.tp-search-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+.tp-search-clear:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
+}
+
+/* ====== 主体：左侧分类轨 + 右侧（chips + 网格） ====== */
+.tp-body {
+  flex: 1;
+  display: flex;
+  min-height: 0; /* 允许子项收缩出滚动区 */
+  border-top: 1px solid var(--color-border);
+}
+
+/* 左侧叙事槽位分类轨 */
+.tp-rail {
+  width: 132px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  padding: 10px 8px;
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.tp-rail-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 7px 10px;
+  font-size: 13px;
+  color: var(--color-text-primary);
+  background: transparent;
+  border-radius: var(--radius-sm);
+  text-align: left;
+}
+.tp-rail-item:hover { background: var(--color-surface-hover); }
+.tp-rail-item.active {
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+.tp-rail-count {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+.tp-rail-item.active .tp-rail-count { color: var(--color-accent); }
+
+.tp-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ====== 来源筛选 chips（对齐市场 chips 质感，可横向滚动） ====== */
+.tp-chips {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 10px 14px 8px;
+  flex-shrink: 0;
+}
+/* 「3D」风格开关：与来源 chips 之间留空隙隔开语义（来源=互斥单选，3D=叠加开关） */
+.tp-chip-style {
+  margin-left: 8px;
+}
+.tp-chip {
+  flex-shrink: 0;
+  font-size: 12px;
+  padding: 4px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+.tp-chip:hover { background: var(--color-bg-soft); }
+.tp-chip.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+.tp-chip-count {
+  font-size: 10px;
+  opacity: 0.75;
+  margin-left: 4px;
+}
+
+/* ====== 卡片网格（仅这里滚动） ====== */
+.tp-grid {
+  flex: 1;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  /* grid-auto-rows:max-content 必加——Chromium 在「grid 滚动容器 + 内容溢出 + 子项含
+     aspect-ratio」时会把 auto 行高压缩均分容器高度（40 卡时每行只剩 24px），
+     max-content 强制按内容定行高（最小复现 scripts/tp-grid-repro.html） */
+  grid-auto-rows: max-content;
+  gap: 12px;
+  align-content: start; /* 行高按内容，不足一屏不拉伸卡片 */
+  padding: 4px 14px 14px;
+}
+.tp-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  padding: 40px 0;
+}
+
+/* 模板卡片：16:9 缩略图 + 名称 + 一行描述 + 底部（默认时长 + 来源徽标）
+   注意：卡片用 block 布局而非 flex column——Chromium 对「flex 子项 + aspect-ratio」
+   在密集网格下有塌缩成 0 宽的怪癖（40 卡时缩略图区 0×0，6 卡时正常），block 布局规避 */
+.tp-card {
+  border: 2px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+  display: block;
+  background: var(--color-panel);
+  text-align: left;
+  padding: 0;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.tp-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+.tp-card.selected {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+.tp-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  overflow: hidden;
+}
+.tp-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* 「体裁推荐」（videoType 适配）与「当前」角标 */
+.tp-rec-badge,
+.tp-current-badge {
+  position: absolute;
+  top: 6px;
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  line-height: 1.5;
+}
+.tp-rec-badge {
+  left: 6px;
+  background: rgba(37, 99, 235, 0.92);
+  color: #fff;
+}
+.tp-current-badge {
+  right: 6px;
+  background: rgba(17, 24, 39, 0.72);
+  color: #fff;
+}
+.tp-card-body {
+  padding: 8px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.tp-card-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tp-card-desc {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tp-card-meta {
+  margin-top: auto;
+  padding-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.tp-duration {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+}
+/* 来源徽标（内置/自定义/云端/AI 生成） */
+.tp-source-badge {
+  font-size: 10px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+.tp-src-builtin { background: var(--color-surface); }
+.tp-src-custom {
+  background: rgba(168, 85, 247, 0.12);
+  border-color: rgba(168, 85, 247, 0.35);
+  color: #9333EA;
+}
+.tp-src-market {
+  background: rgba(14, 165, 233, 0.12);
+  border-color: rgba(14, 165, 233, 0.35);
+  color: #0284C7;
+}
+.tp-src-generated {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.4);
+  color: #B45309;
+}
+:root[data-theme='dark'] .tp-src-custom { color: #C084FC; }
+:root[data-theme='dark'] .tp-src-market { color: #38BDF8; }
+:root[data-theme='dark'] .tp-src-generated { color: #FBBF24; }
+
+/* ====== 底部统计 ====== */
+.tp-footer {
+  flex-shrink: 0;
+  padding: 10px 20px;
+  border-top: 1px solid var(--color-border);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+/* 窄窗口：分类轨收窄，网格列放宽下限 */
+@media (max-width: 720px) {
+  .tp-rail { width: 96px; }
+  .tp-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .tp-header { flex-direction: column; align-items: stretch; gap: 8px; }
+}

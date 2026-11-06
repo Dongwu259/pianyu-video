@@ -1,0 +1,99 @@
+# 依赖
+node_modules/
+
+# 构建输出
+out/
+dist/
+# build/ 下仅 build/appx/ 是商店磁贴资源(由 scripts/make-appx-assets.mjs 生成并入库,
+# 防止 dist:appx 漏跑生成脚本时 electron-builder 悄悄回退到 vendor 默认示例图=审核被拒)
+build/*
+!build/appx/
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 日志
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# Remotion 缓存
+.remotion/
+
+# 临时输出（渲染测试产生的 mp4）
+*.mp4
+!resources/**/*.mp4
+# 段清单随成片配对落盘（lib-promo 写、ffcheck 吃）
+pianyu-*.manifest.json
+
+# 授权服务运行时数据(激活码库/订单库/映射,绝不入库)
+server/data/
+# 发版安装包产物(经部署流程上传服务器,不入库)
+server/public/downloads/*
+
+# 冒烟测试真实 API key
+smoke_test/smoke_agent_key.txt
+
+# UI 截图产物
+.shots/
+# 商店截图脚本的可再生成演示素材
+store-assets/.demo-media/
+
+# 宣传片工程与渲染产物（本地保留，不入库）
+promo/*
+!promo/*/
+promo/*/*
+# 旁白词表单一源入库（纯文本；mp3/录屏素材仍忽略）——P1-3 契约的持久化补丁
+!promo/*/narration.manifest.json
+!promo/*/make-narration*.py
+outputs/
+# 自宣传片目检帧（smoke_test/promo-self.ts 产物）
+.self-promo-frames/
+.zcode/
+# 真实 API Key（本地测试用，绝不入库）
+tests/apikey.txt
+tests/pexels.txt
+dist-transition-visual/
+dist-demos/
+
+# Flick 抽帧/预览产物（可再生，不入库）
+.flick/
+# 官网/商店截图的抽帧产物（可再生，不入库）
+server/public/screenshots/frames/
+# 商店卡片原始抽帧（制成品 cards/ cards-selected/ 入库，raw 由截图脚本可再生）
+store-assets/*/raw/
+scripts/.scratch/
+
+# 蒸馏数据生产线：教师密钥与产物绝不入库
+scripts/distill/teachers.local.json
+scripts/distill/out/
+
+# 本地训练脚手架：venv/预处理数据/适配器产物不入库（training/*.py 脚本入库）
+training/.venv/
+training/data/
+training/out/
+
+# 模型分发小件入库（大件 GGUF 不入库，走 ECS）
+!server/public/downloads/models
+server/public/downloads/models/*
+!server/public/downloads/models/Modelfile
+!server/public/downloads/models/SHA256SUMS
+
+# 审片工作区（拼条判读包/判读单/报告/训练数据——本地工作件不入库）
+.review/

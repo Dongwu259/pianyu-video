@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <rect width="320" height="180" rx="8" fill="#0E1420"/>
+  <circle cx="70" cy="46" r="1.4" fill="#7FA8FF" opacity="0.6"/>
+  <circle cx="262" cy="146" r="1.5" fill="#7FA8FF" opacity="0.55"/>
+  <circle cx="286" cy="34" r="1.2" fill="#7FA8FF" opacity="0.5"/>
+  <ellipse cx="160" cy="104" rx="118" ry="34" fill="none" stroke="#3B82F6" stroke-width="1.6" opacity="0.65"/>
+  <ellipse cx="160" cy="104" rx="136" ry="41" fill="none" stroke="#3B82F6" stroke-width="1" opacity="0.25"/>
+  <ellipse cx="160" cy="108" rx="128" ry="38" fill="#0A0F18" opacity="0.55"/>
+  <rect x="156.5" y="30" width="7" height="66" rx="3.5" fill="#3B82F6"/>
+  <rect x="152" y="30" width="16" height="66" rx="6" fill="#3B82F6" opacity="0.2"/>
+  <circle cx="160" cy="28" r="4.5" fill="#FFFFFF"/>
+  <circle cx="160" cy="28" r="8" fill="#3B82F6" opacity="0.3"/>
+  <g transform="translate(52,96) rotate(-8)">
+    <rect x="-20" y="-13" width="40" height="27" rx="3" fill="#1B2333" stroke="#3B82F6" stroke-width="1.6"/>
+    <rect x="-16" y="-9" width="32" height="16" rx="1.5" fill="#2E4A86"/>
+    <rect x="-16" y="8.5" width="32" height="3.5" rx="1.5" fill="#0A0F18"/>
+  </g>
+  <g transform="translate(268,96) rotate(8)">
+    <rect x="-20" y="-13" width="40" height="27" rx="3" fill="#1B2333" stroke="#3B82F6" stroke-width="1.6"/>
+    <rect x="-13" y="-4.5" width="26" height="4" rx="2" fill="#F5F8FF"/>
+    <rect x="-9" y="2.5" width="18" height="3" rx="1.5" fill="#7FA8FF"/>
+  </g>
+  <g transform="translate(160,132)">
+    <rect x="-19" y="-11" width="38" height="23" rx="3" fill="#1B2333" stroke="#3B82F6" stroke-width="1.5" opacity="0.9"/>
+    <rect x="-15" y="-7" width="30" height="13" rx="1.5" fill="#2E4A86"/>
+  </g>
+  <g transform="translate(100,74) rotate(-16)">
+    <rect x="-17" y="-11" width="34" height="22" rx="3" fill="#1B2333" stroke="#3B82F6" stroke-width="1.4" opacity="0.75"/>
+    <rect x="-13" y="-7" width="26" height="13" rx="1.5" fill="#22375F"/>
+  </g>
+  <g transform="translate(220,74) rotate(16)">
+    <rect x="-17" y="-11" width="34" height="22" rx="3" fill="#1B2333" stroke="#3B82F6" stroke-width="1.4" opacity="0.75"/>
+    <rect x="-13" y="-7" width="26" height="13" rx="1.5" fill="#22375F"/>
+  </g>
+</svg>

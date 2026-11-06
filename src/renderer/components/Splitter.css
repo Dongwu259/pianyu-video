@@ -1,0 +1,54 @@
+/* Splitter - 可拖拽分隔条 */
+
+.splitter {
+  position: relative;
+  flex-shrink: 0;
+  background: var(--color-border, #e2e8f0);
+  z-index: 4;
+  transition: background 0.12s;
+}
+
+/* 竖条：夹在左右两区之间 */
+.splitter.vertical {
+  width: 5px;
+  cursor: col-resize;
+}
+
+/* 横条：夹在上下两区之间 */
+.splitter.horizontal {
+  height: 5px;
+  cursor: row-resize;
+}
+
+.splitter:hover,
+.splitter:active {
+  background: var(--color-accent, #2563eb);
+}
+
+/* 中央抓握提示线（更明显的可拖暗示） */
+.splitter.vertical::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 28px;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.18);
+}
+.splitter.horizontal::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.18);
+}
+.splitter:hover::after,
+.splitter:active::after {
+  background: rgba(255, 255, 255, 0.7);
+}

@@ -1,0 +1,196 @@
+{
+  "app": "promo-video-generator",
+  "format": "vtproj",
+  "version": 1,
+  "name": "示例工程",
+  "savedAt": "2026-08-01T00:00:00.000Z",
+  "data": {
+    "aspectRatioId": "16-9",
+    "orientation": "landscape",
+    "segments": [
+      {
+        "id": "seg-sample-1",
+        "templateId": "Hero3DTitle",
+        "videos": [],
+        "text": {
+          "title": "片语 Pianyu",
+          "subtitle": "三步，做出你的宣传片",
+          "features": [],
+          "brandName": "片语"
+        },
+        "style": {},
+        "layout": {
+          "videoWidthRatio": 0.6,
+          "videoHeightRatio": 0.5,
+          "videoOffsetX": 0,
+          "videoOffsetY": 0,
+          "rotateX": 5,
+          "rotateY": 0,
+          "rotateZ": 0,
+          "perspective": 1200,
+          "scale": 1,
+          "borderRadius": 12
+        },
+        "duration": 5.5,
+        "transition": "crossfade",
+        "videoEffect": "none",
+        "backgroundEffect": "none"
+      },
+      {
+        "id": "seg-sample-2",
+        "templateId": "CityScape3D",
+        "videos": [
+          {
+            "id": "clip-sample-1",
+            "src": "media/demo-clip-1.mp4",
+            "name": "demo-clip-1.mp4",
+            "width": 1280,
+            "height": 720,
+            "duration": 5,
+            "trimStart": 0,
+            "trimEnd": 5,
+            "trimmedDuration": 5,
+            "type": "video"
+          },
+          {
+            "id": "clip-sample-2",
+            "src": "media/demo-clip-2.mp4",
+            "name": "demo-clip-2.mp4",
+            "width": 1280,
+            "height": 720,
+            "duration": 5,
+            "trimStart": 0,
+            "trimEnd": 5,
+            "trimmedDuration": 5,
+            "type": "video"
+          }
+        ],
+        "text": {
+          "title": "上传素材，城市为你亮灯",
+          "subtitle": "每一块大屏，都是你的内容",
+          "features": [
+            "官网首页",
+            "产品特写"
+          ],
+          "brandName": ""
+        },
+        "style": {},
+        "layout": {
+          "videoWidthRatio": 0.6,
+          "videoHeightRatio": 0.5,
+          "videoOffsetX": 0,
+          "videoOffsetY": 0,
+          "rotateX": 5,
+          "rotateY": 0,
+          "rotateZ": 0,
+          "perspective": 1200,
+          "scale": 1,
+          "borderRadius": 12
+        },
+        "duration": 12,
+        "transition": "crossfade",
+        "videoEffect": "none",
+        "backgroundEffect": "none"
+      },
+      {
+        "id": "seg-sample-3",
+        "templateId": "Starfield3D",
+        "videos": [
+          {
+            "id": "clip-sample-3",
+            "src": "media/startrail-logo.png",
+            "name": "startrail-logo.png",
+            "width": 512,
+            "height": 512,
+            "duration": 0,
+            "type": "image"
+          }
+        ],
+        "text": {
+          "title": "把品牌放进星图",
+          "subtitle": "七款 3D 场景 · 九种世界",
+          "features": [
+            "品牌故事",
+            "用户见证"
+          ],
+          "brandName": ""
+        },
+        "style": {},
+        "layout": {
+          "videoWidthRatio": 0.6,
+          "videoHeightRatio": 0.5,
+          "videoOffsetX": 0,
+          "videoOffsetY": 0,
+          "rotateX": 5,
+          "rotateY": 0,
+          "rotateZ": 0,
+          "perspective": 1200,
+          "scale": 1,
+          "borderRadius": 12
+        },
+        "duration": 10,
+        "transition": "zoomOut",
+        "videoEffect": "none",
+        "backgroundEffect": "none"
+      },
+      {
+        "id": "seg-sample-4",
+        "templateId": "OutroCTA",
+        "videos": [
+          {
+            "id": "clip-sample-4",
+            "src": "media/startrail-logo.png",
+            "name": "startrail-logo.png",
+            "width": 512,
+            "height": 512,
+            "duration": 0,
+            "type": "image"
+          }
+        ],
+        "text": {
+          "title": "现在，就来试试片语",
+          "subtitle": "AI 一句话成片 · 模板拼贴 · 一键多平台",
+          "features": [],
+          "brandName": "片语"
+        },
+        "style": {},
+        "layout": {
+          "videoWidthRatio": 0.6,
+          "videoHeightRatio": 0.5,
+          "videoOffsetX": 0,
+          "videoOffsetY": 0,
+          "rotateX": 5,
+          "rotateY": 0,
+          "rotateZ": 0,
+          "perspective": 1200,
+          "scale": 1,
+          "borderRadius": 12
+        },
+        "duration": 5,
+        "transition": "crossfade",
+        "videoEffect": "none",
+        "backgroundEffect": "none"
+      }
+    ],
+    "bgm": null,
+    "logo": null,
+    "captionStyle": {
+      "position": "bottom",
+      "fontSizeScale": 1,
+      "color": "#FFFFFF",
+      "bgOpacity": 0.45
+    },
+    "renderSettings": {
+      "format": "mp4",
+      "crf": 23,
+      "scale": 1,
+      "muted": false,
+      "filename": "",
+      "x264Preset": "medium",
+      "encoder": "auto",
+      "overwrite": true
+    },
+    "activeSegmentIndex": 0
+  },
+  "sampleVersion": 2
+}

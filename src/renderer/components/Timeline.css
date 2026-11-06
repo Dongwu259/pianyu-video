@@ -1,0 +1,219 @@
+/* ====== AE 风格时间轴（浅色主题） ====== */
+
+.tl-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  border-top: 1px solid var(--color-border);
+  font-size: 12px;
+  --tl-gutter-w: 168px;
+  --tl-ruler-h: 26px;
+  --tl-row-h: 30px;
+}
+
+.tl-wrap .tl-empty{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+/* 顶部：标题 + 帧号 + 缓动 + 缩放 */
+.tl-wrap .tl-header{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 6px 12px;
+  height: 36px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+.tl-wrap .tl-title{ font-weight: 600; color: var(--color-text-primary); display: inline-flex; align-items: center; gap: 6px; }
+.tl-wrap .tl-frame{ color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+.tl-wrap .tl-kf-easing{ display: flex; align-items: center; gap: 4px; margin-left: 4px; }
+.tl-wrap .tl-kf-easing-label{ color: var(--color-text-secondary); }
+.tl-wrap .tl-kf-easing select{
+  background: var(--color-panel); color: var(--color-text-primary); border: 1px solid var(--color-border);
+  border-radius: 4px; padding: 2px 4px; font-size: 12px;
+}
+.tl-wrap .tl-zoom{
+  margin-left: auto;
+  display: flex; align-items: center; gap: 6px;
+}
+.tl-wrap .tl-zoom button{
+  width: 22px; height: 22px; border-radius: 4px;
+  border: 1px solid var(--color-border); background: var(--color-panel); color: var(--color-text-primary);
+  cursor: pointer; font-size: 14px; line-height: 1;
+}
+.tl-wrap .tl-zoom button:hover{ background: var(--color-surface); }
+.tl-wrap .tl-zoom span{ width: 34px; text-align: center; color: var(--color-text-secondary); }
+
+/* 主体：gutter 列 + 滚动轨道区 */
+.tl-wrap .tl-body{ display: flex; flex: 1; min-height: 0; }
+
+.tl-wrap .tl-gutters{
+  width: var(--tl-gutter-w);
+  flex-shrink: 0;
+  border-right: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+.tl-wrap .tl-gutter{
+  height: var(--tl-row-h);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  border-bottom: 1px solid var(--color-border);
+}
+.tl-wrap .tl-gutter-head{ height: var(--tl-ruler-h); border-bottom: 1px solid var(--color-border); }
+
+.tl-wrap .tl-stopwatch{
+  width: 20px; height: 20px; border-radius: 4px;
+  border: 1px solid var(--color-border); background: var(--color-panel); color: var(--color-text-secondary);
+  cursor: pointer; font-size: 12px; line-height: 1; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.tl-wrap .tl-stopwatch.active{ background: var(--color-accent); color: white; border-color: var(--color-accent); }
+.tl-wrap .tl-prop-label{ flex: 1; color: var(--color-text-primary); }
+.tl-wrap .tl-prop-val{
+  color: var(--color-text-secondary); font-variant-numeric: tabular-nums;
+  min-width: 38px; text-align: right;
+}
+
+/* 滚动区 */
+.tl-wrap .tl-scroll{ flex: 1; overflow-x: auto; overflow-y: hidden; }
+.tl-wrap .tl-content{ position: relative; min-width: 100%; }
+
+/* 标尺 */
+.tl-wrap .tl-ruler{
+  height: var(--tl-ruler-h);
+  position: relative;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+}
+.tl-wrap .tl-tick{
+  position: absolute; top: 0; bottom: 0;
+  border-left: 1px solid var(--color-border);
+}
+.tl-wrap .tl-tick span{
+  position: absolute; top: 4px; left: 3px;
+  font-size: 10px; color: var(--color-text-secondary);
+}
+
+/* 轨道行 */
+.tl-wrap .tl-track-row{
+  height: var(--tl-row-h);
+  border-bottom: 1px solid var(--color-border);
+}
+.tl-wrap .tl-track{
+  position: relative;
+  height: 100%;
+  cursor: pointer;
+  background: repeating-linear-gradient(
+    to right, transparent 0, transparent 39px, rgba(0,0,0,0.025) 39px, rgba(0,0,0,0.025) 40px
+  );
+}
+.tl-wrap .tl-track-row:nth-child(odd) .tl-track{ background-color: rgba(0,0,0,0.015); }
+
+/* 菱形关键帧 */
+.tl-wrap .tl-diamond{
+  position: absolute;
+  top: 50%;
+  width: 11px; height: 11px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: var(--color-accent);
+  border: 1px solid white;
+  cursor: ew-resize;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
+}
+.tl-wrap .tl-diamond:hover{ background: #1d4ed8; }
+.tl-wrap .tl-diamond.selected{
+  background: #1d4ed8;
+  width: 13px; height: 13px;
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.3);
+}
+
+/* 播放头 */
+.tl-wrap .tl-playhead{
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: #EF4444;
+  pointer-events: none;
+  z-index: 5;
+  transform: translateX(-1px);
+}
+.tl-wrap .tl-playhead::before{
+  content: '';
+  position: absolute;
+  top: 0; left: -5px;
+  width: 12px; height: 8px;
+  background: #EF4444;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/* 缓动曲线编辑器 */
+.tl-wrap .tl-curve-toggle{
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--color-text-secondary, #64748b);
+  background: var(--color-bg-input, #fff);
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.tl-wrap .tl-curve-toggle:hover{ color: var(--color-text, #374151); }
+.tl-wrap .tl-curve-toggle.active{
+  color: var(--color-accent, #2563eb);
+  border-color: var(--color-accent, #2563eb);
+  background: rgba(37, 99, 235, 0.08);
+}
+
+.tl-wrap .tl-curve-panel{
+  padding: 8px 12px 10px;
+  background: var(--color-bg-soft);
+  border-bottom: 1px solid var(--color-border, #e2e8f0);
+}
+.tl-wrap .tl-curve-panel-label{
+  display: block;
+  font-size: 11px;
+  color: var(--color-text-secondary, #94a3b8);
+  margin-bottom: 4px;
+}
+.tl-wrap .tl-curve-panel .ce-svg{ height: 130px; }
+
+/* 拖拽 scrub：禁用时间轴内文字选中（避免拖播放头时选中帧数文字） */
+.tl-wrap { user-select: none; }
+.tl-wrap .tl-ruler{ cursor: pointer; touch-action: none; }
+
+/* 播放头拖拽手柄：顶部可抓区域（容器仍 pointer-events:none，手柄单独开启） */
+.tl-wrap .tl-playhead-grip{
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 22px;
+  pointer-events: auto;
+  cursor: ew-resize;
+  touch-action: none;
+  z-index: 6;
+}
+
+/* 深色主题：黑色系斑马纹在深底上不可见，换浅色条纹（须放在原规则之后以覆盖） */
+:root[data-theme='dark']   .tl-wrap .tl-track{
+  background: repeating-linear-gradient(
+    to right, transparent 0, transparent 39px, rgba(255,255,255,0.05) 39px, rgba(255,255,255,0.05) 40px
+  );
+}
+:root[data-theme='dark']   .tl-wrap .tl-track-row:nth-child(odd) .tl-track{ background-color: rgba(255,255,255,0.02); }

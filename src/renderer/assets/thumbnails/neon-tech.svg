@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0 H0 V20" fill="none" stroke="#94a3b8" stroke-width="0.5" opacity="0.18"/>
+    </pattern>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="320" height="180" rx="8" fill="#0a0e1a"/>
+  <rect width="320" height="180" rx="8" fill="url(#grid)"/>
+  <ellipse cx="160" cy="20" rx="120" ry="40" fill="#22d3ee" opacity="0.06"/>
+  <!-- 霓虹视频画框 -->
+  <rect x="92" y="50" width="136" height="76" rx="6" fill="#0f172a" stroke="#22d3ee" stroke-width="1.8" filter="url(#glow)"/>
+  <!-- 四角括号 -->
+  <g stroke="#22d3ee" stroke-width="2.5" fill="none" stroke-linecap="round" filter="url(#glow)">
+    <path d="M82 56 V42 H96"/>
+    <path d="M224 42 H238 V56"/>
+    <path d="M82 120 V134 H96"/>
+    <path d="M224 134 H238 V120"/>
+  </g>
+  <!-- 播放符 -->
+  <polygon points="152,74 152,102 176,88" fill="#22d3ee" opacity="0.9"/>
+  <!-- 标题线 + 霓虹分割线 -->
+  <rect x="118" y="16" width="84" height="7" rx="3.5" fill="#e2e8f0" opacity="0.9"/>
+  <rect x="136" y="29" width="48" height="2" rx="1" fill="#22d3ee" opacity="0.9"/>
+  <!-- 功能要点线 -->
+  <rect x="94" y="150" width="34" height="5" rx="2.5" fill="#22d3ee" opacity="0.75"/>
+  <rect x="136" y="150" width="34" height="5" rx="2.5" fill="#94a3b8" opacity="0.45"/>
+  <rect x="178" y="150" width="34" height="5" rx="2.5" fill="#3b82f6" opacity="0.75"/>
+</svg>

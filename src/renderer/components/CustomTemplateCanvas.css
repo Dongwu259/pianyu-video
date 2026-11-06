@@ -1,0 +1,95 @@
+/* ====== 自定义模板画布 ====== */
+
+.custom-canvas {
+  position: relative;
+  width: 100%;
+  background: var(--color-surface);
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.custom-canvas.landscape {
+  aspect-ratio: 16 / 9;
+}
+
+.custom-canvas.portrait {
+  aspect-ratio: 9 / 16;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.custom-canvas.editable {
+  cursor: default;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.canvas-el {
+  user-select: none;
+}
+
+.custom-canvas.editable .canvas-el {
+  outline: 1px dashed transparent;
+  transition: outline-color 0.1s;
+}
+
+.custom-canvas.editable .canvas-el:hover {
+  outline-color: rgba(59, 130, 246, 0.5);
+}
+
+.canvas-el.selected {
+  outline: 2px solid #3b82f6 !important;
+  outline-offset: 2px;
+}
+
+.video-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+  color: #64748b;
+  font-size: 28px;
+}
+
+.placeholder-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.text-el {
+  pointer-events: auto;
+}
+
+/* 运动路径 */
+.ct-motion-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 4;
+  overflow: visible;
+}
+.ct-motion-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #89b4fa;
+  border: 1.5px solid #11111b;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* 安全区引导线 */
+.ct-safe {
+  position: absolute;
+  pointer-events: none;
+  z-index: 3;
+}
+.ct-safe.action-safe { inset: 3.5%; border: 1px dashed rgba(255, 255, 255, 0.3); }
+.ct-safe.title-safe { inset: 5%; border: 1px dashed rgba(250, 226, 175, 0.45); }

@@ -1,0 +1,87 @@
+/* 文字编辑器（内嵌版） */
+
+.text-editor-inline {
+  padding: 0;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+.form-group input {
+  width: 100%;
+}
+
+.text-anim-select {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 13px;
+  color: var(--color-text-primary);
+  background: var(--color-bg-input, #fff);
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.text-anim-select:focus {
+  outline: none;
+  border-color: var(--color-accent, #2563eb);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* 功能点列表 */
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.feature-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.feature-bullet {
+  color: var(--color-accent);
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.feature-row input {
+  flex: 1;
+}
+
+.btn-remove-sm {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.btn-remove-sm:hover {background: #FEE2E2; color: #DC2626;}
+
+.btn-add-feature {
+  background: transparent;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 0;
+}
+
+.btn-add-feature:hover {text-decoration: underline;}

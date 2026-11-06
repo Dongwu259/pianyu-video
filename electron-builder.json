@@ -1,0 +1,81 @@
+{
+  "appId": "com.photoagent.promo-generator",
+  "productName": "片语",
+  "directories": {
+    "output": "dist"
+  },
+  "files": [
+    "out/**/*",
+    "package.json",
+    "node_modules/**/*",
+    "src/remotion/**/*",
+    "src/shared/**/*",
+    "resources/fonts/**/*",
+    "resources/sample-project/**/*",
+    "resources/sfx/**/*",
+    "resources/luts/**/*",
+    "resources/bgm/**/*"
+  ],
+  // asar 试验结论（2026-08-01）：不可开启。@remotion/bundler 运行时 bundle 会
+  // process.chdir() 到入口目录（app.asar 内，OS 无法 chdir 进归档，ENOENT）；
+  // 且主进程 spawn ffprobe/ffmpeg/esbuild 走 app.asar 内路径，Electron 的 child_process
+  // 不做 asar→asar.unpacked 重定向（已 unpack 仍 spawn ENOENT）。详见 HANDOFF.md §6。
+  "asar": false,
+  "asarUnpack": [
+    "node_modules/@remotion/compositor-win32-x64-msvc/**",
+    "node_modules/esbuild/**",
+    "node_modules/@esbuild/**"
+  ],
+  "npmRebuild": false,
+  "win": {
+    "target": "nsis",
+    "icon": "resources/icons/icon.ico",
+    "artifactName": "pianyu-${version}.exe"
+  },
+  // ===== Microsoft Store 上架配置（appx）=====
+  // 实测 app-builder-lib（electron-builder 25）：没有 msix target，商店包用 appx
+  // （Partner Center 接受 .appx 提交；schema 支持的 win target 为 nsis/nsis-web/portable/
+  // appx/msi/msi-wrapped/squirrel/7z/zip/tar.*/dir，以 node_modules/app-builder-lib/scheme.json 为准）。
+  // 本段平时不参与构建（win.target 只有 nsis）；出商店包用 npm run dist:appx。
+  // 下面三个值为占位符，上架前必须从 Partner Center「产品管理 → 产品标识」页复制真实值替换，
+  // 否则提交会因包标识不匹配被拒：
+  // 磁贴/启动画面等视觉资源来自 build/appx/(scripts/make-appx-assets.mjs 生成,已入库;
+  // dist:appx 会先自动重跑生成)。缺该目录时 app-builder-lib 会填 vendor 示例图 → 商店
+  // 审核 10.1.1.11「磁贴含默认图」被拒,务必保持 build/appx/ 存在且为最新。
+  "appx": {
+    "identityName": "8DBD4893.32027D994A433", // Partner Center「产品标识」包/标识/名称（2026-08-03 换入真值）
+    "publisher": "CN=790EAA29-BECD-41CC-8403-19746060F17A", // Partner Center「产品标识」包/标识/发布者
+    "publisherDisplayName": "东吴摄影", // Partner Center「产品标识」发布者显示名称
+    "applicationId": "PianYu",
+    "displayName": "片语",
+    "backgroundColor": "#0A0812",
+    "languages": ["zh-CN"],
+    "minVersion": "10.0.17763.0",
+    "maxVersionTested": "10.0.26100.0",
+    "showNameOnTiles": true,
+    "electronUpdaterAware": false,
+    // 必须单独给 appx 指定 artifactName：app-builder-lib 的 AppXTarget 会把 win.artifactName
+    // （pianyu-${version}.exe）合并进 appx 选项，不覆盖的话 appx 包会被命名成 .exe 扩展名。
+    // 注意：nsis 的 win.artifactName 保持 .exe 不动。
+    "artifactName": "pianyu-${version}.appx"
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "片语"
+  },
+  // ===== 自动更新发布源（electron-updater generic provider）=====
+  // 打 NSIS 包时据此生成 dist/latest.yml，并把该地址内嵌进安装包的 app-update.yml。
+  // 发版时把 latest.yml + exe（+ blockmap）传到 server/public/downloads/ 由 nginx 静态提供，
+  // 客户端启动时自动发现新版本（流程见 DEPLOY.md「发布更新」）。
+  // 商店 appx 包不使用此通道（客户端按 process.windowsStore 门禁，走 Partner Center 更新）。
+  "publish": [
+    {
+      "provider": "generic",
+      "url": "https://studio.dwphoto.top/videotool/downloads/"
+    }
+  ],
+  "compression": "maximum"
+}

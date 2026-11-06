@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <rect width="320" height="180" rx="8" fill="#F3ECE0"/>
+  <!-- 三张拍立得散落：白框 + 照片区 + 底部小注 -->
+  <g transform="rotate(-8 70 70)">
+    <rect x="22" y="30" width="86" height="102" rx="4" fill="#FFFFFF"/>
+    <rect x="30" y="38" width="70" height="70" fill="#93C5FD"/>
+    <text x="65" y="123" font-family="Georgia, serif" font-style="italic" font-size="10" fill="#292524" fill-opacity="0.7" text-anchor="middle">lake day</text>
+  </g>
+  <g transform="rotate(6 160 95)">
+    <rect x="118" y="46" width="86" height="102" rx="4" fill="#FFFFFF"/>
+    <rect x="126" y="54" width="70" height="70" fill="#FCD34D"/>
+    <text x="161" y="139" font-family="Georgia, serif" font-style="italic" font-size="10" fill="#292524" fill-opacity="0.7" text-anchor="middle">golden hr</text>
+  </g>
+  <g transform="rotate(-4 250 110)">
+    <rect x="214" y="62" width="86" height="102" rx="4" fill="#FFFFFF"/>
+    <rect x="222" y="70" width="70" height="70" fill="#6EE7B7"/>
+    <text x="257" y="155" font-family="Georgia, serif" font-style="italic" font-size="10" fill="#292524" fill-opacity="0.7" text-anchor="middle">campfire</text>
+  </g>
+  <!-- 软阴影示意 -->
+  <rect x="118" y="46" width="86" height="102" rx="4" fill="#292524" opacity="0.08"/>
+</svg>

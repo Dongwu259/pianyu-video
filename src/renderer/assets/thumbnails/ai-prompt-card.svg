@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <defs>
+    <radialGradient id="aiGlow" cx="50%" cy="42%" r="70%">
+      <stop offset="0%" stop-color="#6D8CFF" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#6D8CFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="180" rx="8" fill="#0E0A1E"/>
+  <rect width="320" height="180" rx="8" fill="url(#aiGlow)"/>
+  <!-- 竖向三色微条带氛围 -->
+  <rect x="18" y="0" width="3" height="180" fill="#2DD4BF" opacity="0.14"/>
+  <rect x="60" y="0" width="3" height="180" fill="#E879F9" opacity="0.12"/>
+  <rect x="104" y="0" width="3" height="180" fill="#A78BFA" opacity="0.12"/>
+  <rect x="216" y="0" width="3" height="180" fill="#2DD4BF" opacity="0.12"/>
+  <rect x="262" y="0" width="3" height="180" fill="#E879F9" opacity="0.14"/>
+  <rect x="300" y="0" width="3" height="180" fill="#A78BFA" opacity="0.12"/>
+  <!-- 提示输入框 -->
+  <rect x="62" y="52" width="196" height="34" rx="17" fill="#FFFFFF" fill-opacity="0.08" stroke="#6D8CFF" stroke-opacity="0.75" stroke-width="1.6"/>
+  <!-- 火花 -->
+  <path d="M80 62 C81 67 83 69 88 70 C83 71 81 73 80 78 C79 73 77 71 72 70 C77 69 79 67 80 62 Z" fill="#6D8CFF"/>
+  <!-- 打出的字与光标 -->
+  <rect x="96" y="64" width="74" height="9" rx="4.5" fill="#F8FAFC" opacity="0.92"/>
+  <rect x="175" y="63" width="3.5" height="11" rx="1.5" fill="#6D8CFF"/>
+  <!-- 回车键（亮起） -->
+  <circle cx="236" cy="69" r="11" fill="#6D8CFF"/>
+  <path d="M236 63 L241 69 L237.8 69 L237.8 75 L234.2 75 L234.2 69 L231 69 Z" fill="#FFFFFF"/>
+  <!-- 建议 chips -->
+  <rect x="76" y="102" width="70" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.09" stroke="#FFFFFF" stroke-opacity="0.2"/>
+  <circle cx="86" cy="111" r="2.6" fill="#2DD4BF"/>
+  <rect x="93" y="108" width="44" height="6" rx="3" fill="#F8FAFC" opacity="0.55"/>
+  <rect x="152" y="102" width="70" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.09" stroke="#FFFFFF" stroke-opacity="0.2"/>
+  <circle cx="162" cy="111" r="2.6" fill="#E879F9"/>
+  <rect x="169" y="108" width="44" height="6" rx="3" fill="#F8FAFC" opacity="0.55"/>
+  <!-- 结果卡生长 -->
+  <rect x="94" y="132" width="132" height="34" rx="7" fill="#0B0F16" stroke="#6D8CFF" stroke-opacity="0.55" stroke-width="1.4"/>
+  <rect x="104" y="142" width="52" height="6" rx="3" fill="#F8FAFC" opacity="0.3"/>
+  <rect x="104" y="153" width="76" height="5" rx="2.5" fill="#F8FAFC" opacity="0.18"/>
+  <!-- 底部标题条 -->
+  <rect x="128" y="172" width="64" height="4" rx="2" fill="#F8FAFC" opacity="0.4"/>
+</svg>

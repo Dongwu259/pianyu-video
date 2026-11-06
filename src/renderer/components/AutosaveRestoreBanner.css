@@ -1,0 +1,70 @@
+/* 自动保存恢复横幅：右下角浮层，非模态不阻塞任何操作（MCP 会话也不受影响） */
+
+.autosave-banner {
+  position: fixed;
+  right: 20px;
+  bottom: 48px;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 460px;
+  padding: 12px 16px;
+  background: var(--color-bg-primary, #ffffff);
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: 10px;
+  box-shadow: 0 8px 28px -8px rgba(15, 23, 42, 0.28);
+}
+
+.autosave-banner-icon {
+  flex: none;
+  color: var(--color-accent, #2563eb);
+}
+
+.autosave-banner-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.autosave-banner-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary, #1e293b);
+}
+
+.autosave-banner-sub {
+  font-size: 12px;
+  color: var(--color-text-secondary, #64748b);
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.autosave-banner-btn {
+  flex: none;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border, #e2e8f0);
+  background: transparent;
+  color: var(--color-text-secondary, #64748b);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.autosave-banner-btn:hover {
+  background: var(--color-bg-secondary, #f1f5f9);
+}
+
+.autosave-banner-btn-primary {
+  color: #ffffff;
+  background: var(--color-accent, #2563eb);
+  border-color: transparent;
+}
+
+.autosave-banner-btn-primary:hover {
+  background: var(--color-accent, #2563eb);
+  filter: brightness(1.08);
+}

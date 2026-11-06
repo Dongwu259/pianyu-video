@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <rect width="320" height="180" rx="8" fill="#FBF7EF"/>
+  <rect x="10" y="10" width="300" height="160" rx="6" fill="none" stroke="#292524" stroke-opacity="0.25" stroke-width="2"/>
+  <!-- 大号日期印章（轻微旋转的砸落感） -->
+  <text x="36" y="86" font-family="Arial, sans-serif" font-size="44" font-weight="800" fill="#292524" transform="rotate(-3 36 86)">07·21</text>
+  <!-- 琥珀标记条 + 地点行 -->
+  <rect x="38" y="104" width="5" height="22" rx="2.5" fill="#D97706"/>
+  <text x="52" y="121" font-family="Arial, sans-serif" font-size="19" font-weight="500" fill="#292524" fill-opacity="0.78" letter-spacing="1">青海湖 · 二郎剑</text>
+  <!-- 标签胶囊 -->
+  <rect x="38" y="138" width="46" height="18" rx="9" fill="#D97706" fill-opacity="0.1" stroke="#D97706" stroke-opacity="0.55"/>
+  <text x="61" y="151" font-family="Arial, sans-serif" font-size="11" fill="#D97706" text-anchor="middle">自驾</text>
+  <rect x="90" y="138" width="46" height="18" rx="9" fill="#D97706" fill-opacity="0.1" stroke="#D97706" stroke-opacity="0.55"/>
+  <text x="113" y="151" font-family="Arial, sans-serif" font-size="11" fill="#D97706" text-anchor="middle">日出</text>
+  <rect x="142" y="138" width="46" height="18" rx="9" fill="#D97706" fill-opacity="0.1" stroke="#D97706" stroke-opacity="0.55"/>
+  <text x="165" y="151" font-family="Arial, sans-serif" font-size="11" fill="#D97706" text-anchor="middle">篝火</text>
+  <!-- 右上角 REC -->
+  <circle cx="266" cy="26" r="5" fill="#DC2626"/>
+  <text x="278" y="31" font-family="Arial, sans-serif" font-size="12" fill="#292524" fill-opacity="0.65" letter-spacing="3">REC</text>
+</svg>

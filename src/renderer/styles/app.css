@@ -1,0 +1,218 @@
+/* 应用主布局 */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* 顶部导航栏 */
+.app-header {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-panel);
+  flex-shrink: 0;
+}
+
+.app-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  margin-right: 32px;
+  flex-shrink: 0;
+}
+
+.logo-icon {font-size: 20px;}
+
+/* 步骤导航 */
+.steps-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.step-item:hover {
+  background: var(--color-surface);
+}
+
+.step-item.active {
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+}
+
+.step-item.completed {
+  color: var(--color-accent);
+}
+
+.step-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-border);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-item.active .step-num {
+  background: var(--color-accent);
+}
+
+.step-item.completed .step-num {
+  background: var(--color-accent);
+}
+
+.step-divider {
+  width: 24px;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.header-spacer {
+  flex: 1;
+  min-width: 0; /* 允许收缩，配合 overflow 裁剪内容，避免挤压右侧按钮组 */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding-right: 12px;
+}
+
+/* 顶部导航按钮 */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-header {
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  font-size: 12px;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-header:hover {
+  background: var(--color-surface-hover);
+  border-color: #d1d5db;
+}
+
+/* 撤销/重做等按钮的禁用态：置灰且不可点 */
+.btn-header:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.btn-header:disabled:hover {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+/* AI 助手面板打开时按钮的高亮态 */
+.btn-header.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+/* 自动保存状态小字提示（在弹性 spacer 内，空间不足时省略号裁剪） */
+/* 授权按钮上的免费版提示圆点（琥珀色） */
+.header-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #F59E0B;
+  margin-left: 6px;
+  flex-shrink: 0;
+}
+
+/* ====== Modal 弹窗 ====== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: var(--color-panel);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: slideUp 0.2s ease;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.modal-close:hover {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+/* 主内容区 */
+.app-main {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  background: var(--color-surface);
+}

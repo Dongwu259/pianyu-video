@@ -1,0 +1,99 @@
+/* TransitionFocusPicker - 运镜转场焦点选择器 */
+
+.focus-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 紧凑画布：转场行高度有限（150px 大图会把故事板卡片挤到视口外），96px 够拖焦点 */
+.focus-picker-canvas {
+  position: relative;
+  width: 96px;
+  flex: none;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #111;
+  border: 1px solid var(--color-border);
+  cursor: crosshair;
+  touch-action: none;
+  user-select: none;
+}
+
+.focus-picker-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* 视频画框提示（自动焦点的依据） */
+.focus-picker-frame {
+  position: absolute;
+  border: 1px dashed rgba(255, 255, 255, 0.55);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.focus-picker-dot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: #ffb020;
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.9));
+  pointer-events: none;
+  display: flex;
+}
+
+.focus-picker-dot.auto {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.focus-picker-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.focus-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.focus-picker-row input[type='range'] {
+  width: 110px;
+}
+
+.focus-picker-label {
+  flex: none;
+}
+
+.focus-picker-value {
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.focus-picker-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.focus-picker-reset:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}

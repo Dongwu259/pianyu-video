@@ -1,0 +1,69 @@
+/* 授权到期续费提醒横幅（顶部悬浮，非模态不遮挡工作；浅/深主题均走 CSS 变量） */
+
+.renewal-reminder-banner {
+  position: fixed;
+  top: 56px; /* 紧贴顶部导航下方 */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 900; /* 低于 modal-overlay(1000)：打开任何弹窗时被正常遮盖 */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: min(640px, calc(100vw - 48px));
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  box-shadow: var(--shadow-lg);
+  font-size: 13px;
+  color: var(--color-text-primary);
+  animation: renewalReminderIn 0.2s ease;
+}
+
+@keyframes renewalReminderIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.renewal-reminder-icon {
+  flex-shrink: 0;
+  color: #d97706; /* 琥珀色：提醒但不告警 */
+}
+
+.renewal-reminder-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.renewal-reminder-btn-primary {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 12px;
+}
+
+.renewal-reminder-btn-primary:hover {
+  opacity: 0.88;
+}
+
+.renewal-reminder-btn-dismiss {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: 12px;
+}
+
+.renewal-reminder-btn-dismiss:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
+}

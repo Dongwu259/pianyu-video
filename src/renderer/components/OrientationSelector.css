@@ -1,0 +1,332 @@
+/* 方向选择 */
+
+.orientation-selector {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 32px 40px;
+  overflow-y: auto;
+}
+
+.orientation-header {
+  margin-bottom: 28px;
+  flex-shrink: 0;
+}
+
+.orientation-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.orientation-header p {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+/* 比例预设选项（6 卡片网格） */
+.orientation-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 32px;
+  flex-shrink: 0;
+}
+
+.orient-btn {
+  padding: 16px 12px;
+  background: var(--color-panel);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.orient-btn:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.orient-btn.active {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+
+/* 预览框居中区，固定高度让卡片对齐 */
+.orient-preview-wrap {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orient-preview {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orient-demo {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.orient-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.orient-desc {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+/* 模板选择 */
+.template-section {
+  margin-bottom: 24px;
+  flex-shrink: 0;
+}
+
+.template-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* 推荐横排：横向滚动（滚轮垂直滚动即横向翻，见组件 wheel 接管）；首位是「浏览全部模板」入口卡 */
+.template-rec-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-behavior: smooth;
+}
+
+/* 横向滚动条加粗可见，不用再拖浏览器默认的超细条 */
+.template-rec-row::-webkit-scrollbar {
+  height: 10px;
+}
+.template-rec-row::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary, #F1F5F9);
+  border-radius: 5px;
+}
+.template-rec-row::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 5px;
+}
+.template-rec-row::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+.template-rec-row .template-mini-card {
+  flex-shrink: 0;
+  width: 136px;
+}
+
+.template-mini-card {
+  padding: 12px;
+  background: var(--color-panel);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.template-mini-card:hover {
+  border-color: var(--color-accent);
+}
+
+.template-mini-card.selected {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+
+.mini-thumb {font-size: 24px;}
+.mini-thumb-img {width: 112px; height: 63px; display: block; border-radius: 4px;}
+.mini-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 「浏览全部模板 / 搜索模板」入口卡（推荐横排首位，虚线醒目） */
+.template-browse-card {
+  flex-shrink: 0;
+  width: 136px;
+  min-height: 110px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.template-browse-card:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+.template-browse-sub {font-size: 10px; font-weight: 400;}
+
+/* 底部 */
+.orientation-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* 「下一步」旁的已选模板名（推荐横排之外的选中项也可见） */
+.orientation-selected-note {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  max-width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.orientation-selected-note b {color: var(--color-text-primary); font-weight: 600;}
+
+/* 视频体裁卡片行（决定 AI 剧本与模板推荐口径；紧凑横排，5 个体裁一排） */
+.genre-section {
+  margin-top: 12px;
+  flex-shrink: 0;
+}
+.genre-section h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 10px;
+}
+.genre-options {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  /* 与下方比例卡组拉开间距（否则横屏/竖屏按钮会贴上来） */
+  margin-bottom: 26px;
+}
+.genre-btn {
+  padding: 12px 10px;
+  background: var(--color-panel);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+.genre-btn:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+.genre-btn.active {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+.genre-label {font-size: 13px; font-weight: 700; color: var(--color-text-primary);}
+.genre-desc {font-size: 11px; color: var(--color-text-secondary);}
+
+/* 模板标题旁的「已按体裁推荐」小注 */
+.template-filter-note {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+/* ===== 快速开始：示例工程 / AI 一句话成片 / 只录屏 三条最短路径 ===== */
+.quick-start {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 22px;
+}
+/* 窄窗口三卡挤成竖排（每卡一行），保住副标题可读性 */
+@media (max-width: 1100px) {
+  .quick-start {
+    grid-template-columns: 1fr;
+  }
+}
+.quick-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--color-panel);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+}
+.quick-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+.quick-card-ai {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+/* 「只录屏」卡：青绿强调（与前两卡区分，指向「录屏美化」品类；半透明底两主题通用） */
+.quick-card-rec {
+  border-color: #0D9488;
+  background: rgba(13, 148, 136, 0.08);
+}
+.quick-card-rec .quick-icon {
+  background: #0D9488;
+}
+.quick-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+}
+.quick-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.quick-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+.quick-sub {
+  font-size: 11.5px;
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+}

@@ -1,0 +1,684 @@
+/* ====== AI 助手面板（右侧抽屉） ====== */
+
+.ai-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 380px;
+  background: var(--color-panel);
+  border-left: 1px solid var(--color-border);
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  z-index: 900;
+}
+
+.ai-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ai-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+/* 本地精简模式徽标：loopback 端点自动启用的端侧档可见标识 */
+.ai-edge-badge {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 3px 7px;
+  border-radius: 999px;
+  color: var(--color-text-secondary);
+  background: color-mix(in srgb, var(--color-text-secondary) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-text-secondary) 25%, transparent);
+}
+
+.ai-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.ai-icon-btn:hover {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+/* ====== 头部工具栏（YOLO / 压缩 / 导出 / 导入 / 新对话） ====== */
+
+.ai-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ai-header-actions .ai-icon-btn {
+  width: 26px;
+  height: 26px;
+}
+
+.ai-icon-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* YOLO 开启：琥珀红高亮，警示这是完全权限模式 */
+.ai-icon-btn.ai-yolo-on {
+  color: #d97706;
+  background: rgba(217, 119, 6, 0.12);
+}
+
+.ai-icon-btn.ai-yolo-on:hover {
+  background: rgba(217, 119, 6, 0.2);
+  color: #b45309;
+}
+
+.ai-yolo-banner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  font-size: 12px;
+  color: #b45309;
+  background: rgba(217, 119, 6, 0.1);
+  border-bottom: 1px solid rgba(217, 119, 6, 0.25);
+}
+
+/* 新对话两步确认态：按钮变宽显示文字 */
+.ai-icon-btn.ai-clear-confirm {
+  width: auto;
+  padding: 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #dc2626;
+  background: rgba(220, 38, 38, 0.1);
+}
+
+/* 导出格式菜单（悬浮小卡片） */
+.ai-export-wrap {
+  position: relative;
+}
+
+.ai-export-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  padding: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg, #fff);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.ai-export-menu button {
+  padding: 8px 10px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ai-export-menu button:hover {
+  background: var(--color-surface);
+}
+
+/* ====== 未配置引导 ====== */
+
+.ai-setup-guide {
+  /* 与 .ai-messages 同款：占满面板剩余高度，内容超出（key 快速配置/MCP 推荐卡多）时可滚动，
+     否则下面的卡被面板底边裁掉够不着 */
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 20px;
+  font-size: 13px;
+  color: var(--color-text-primary);
+  line-height: 1.7;
+}
+
+.ai-setup-guide ol {
+  margin: 8px 0 16px;
+  padding-left: 20px;
+  color: var(--color-text-secondary);
+}
+
+/* 推荐路径卡：MCP 连接 agent（模型由 agent 自带，免手动配置） */
+.ai-setup-recommend {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.14), rgba(124, 58, 237, 0.10));
+  border: 1px solid rgba(37, 99, 235, 0.4);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.ai-setup-recommend-title {
+  font-weight: 700;
+  font-size: 13.5px;
+  margin-bottom: 6px;
+}
+
+.ai-setup-recommend p {
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  color: var(--color-text-secondary);
+}
+
+.ai-setup-detected {
+  font-size: 12px !important;
+  color: var(--color-accent) !important;
+  font-weight: 600;
+}
+
+.ai-setup-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* 手动配置入口行（快速配置卡底部；ai-mcp-guide-shot.cjs 截图脚本依赖该类名与按钮文案） */
+.ai-setup-manual {
+  font-size: 12.5px;
+  color: var(--color-text-secondary);
+}
+
+/* ====== 消息流 ====== */
+
+.ai-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ai-empty-hint {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: 8px;
+  padding: 12px;
+  line-height: 1.6;
+}
+
+.ai-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ai-msg-user {
+  align-items: flex-end;
+}
+
+.ai-msg-assistant {
+  align-items: flex-start;
+}
+
+/* 系统通知消息（渲染结果回传等）：居中、弱化的窄条 */
+.ai-msg-system {
+  align-items: center;
+}
+
+.ai-msg-system .ai-bubble {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: 1px dashed var(--color-border);
+  font-size: 12px;
+}
+
+.ai-bubble {
+  max-width: 85%;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.ai-msg-user .ai-bubble {
+  background: var(--color-accent);
+  color: white;
+  border-bottom-right-radius: 2px;
+}
+
+.ai-msg-assistant .ai-bubble {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  border-bottom-left-radius: 2px;
+}
+
+.ai-bubble-loading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-secondary);
+}
+
+/* ====== 工具调用折叠卡 ====== */
+
+.ai-tool-card {
+  max-width: 85%;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-panel);
+  font-size: 12px;
+}
+
+.ai-tool-card summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.ai-tool-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.ai-tool-done {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 8px;
+  border-radius: 10px;
+  background: #ECFDF5;
+  color: #059669;
+}
+
+.ai-tool-list {
+  border-top: 1px solid var(--color-border);
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ai-tool-item {
+  font-family: monospace;
+  color: var(--color-text-secondary);
+}
+
+/* ====== 渲染确认卡 ====== */
+
+.ai-render-card {
+  border: 1px solid var(--color-accent);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #F5F8FF;
+}
+
+.ai-render-card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.ai-render-card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ai-confirm-detail {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.ai-render-card-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ai-progress-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-border);
+  overflow: hidden;
+}
+
+.ai-progress-fill {
+  height: 100%;
+  background: var(--color-accent);
+  transition: width 0.3s;
+}
+
+.ai-progress-text {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.ai-render-card-result {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.ai-render-ok {
+  color: #059669;
+  font-weight: 600;
+}
+
+.ai-render-fail {
+  color: #DC2626;
+}
+
+.ai-render-path {
+  color: var(--color-text-secondary);
+  word-break: break-all;
+}
+
+/* ====== 按钮 ====== */
+
+.ai-btn-primary {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  background: var(--color-accent);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ai-btn-primary:hover {
+  opacity: 0.9;
+}
+
+.ai-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ai-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-panel);
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.ai-btn-ghost:hover {
+  color: var(--color-text-primary);
+}
+
+/* ====== 错误提示 ====== */
+
+.ai-error {
+  margin: 0 16px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #DC2626;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* ====== 快捷提示 ====== */
+
+.ai-quick-prompts {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px 0;
+  flex-wrap: wrap;
+}
+
+.ai-chip {
+  padding: 4px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-panel);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.ai-chip:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.ai-chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 「一键成片」主行动 chip：实心品牌色，与普通描边 chip 区分 */
+.ai-chip.ai-chip-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.ai-chip.ai-chip-primary:hover:not(:disabled) {
+  opacity: 0.9;
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+/* ====== 输入区 ====== */
+
+.ai-input-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 10px 16px 14px;
+}
+
+.ai-input {
+  flex: 1;
+  resize: none;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  line-height: 1.5;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.ai-input:focus {
+  border-color: var(--color-accent);
+}
+
+.ai-input:disabled {
+  background: var(--color-surface);
+}
+
+.ai-send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-accent);
+  color: white;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.ai-send-btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.ai-send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 未配置引导里的「演示编排」区：先跑通闭环，配置后置 */
+.ai-setup-demo {
+  background: var(--color-panel);
+  border: 1px solid var(--color-accent);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+.ai-setup-demo-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 6px;
+}
+.ai-setup-demo p {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+  margin: 0 0 10px;
+}
+.ai-setup-demo .ai-demo-done-note {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+  margin: 8px 0 0;
+}
+
+/* ====== 快速配置（AI 零门槛）：选厂商 → 粘 Key → 保存即用 ====== */
+.ai-setup-quick {
+  background: var(--color-surface, #F8FAFC);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+.ai-quick-steps {
+  list-style: none;
+  margin: 10px 0 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ai-quick-step-label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 6px;
+}
+.ai-quick-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.ai-quick-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--color-panel, #fff);
+  border: 1px solid var(--color-border);
+  border-radius: 13px;
+  padding: 3px 10px;
+  font-size: 12px;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.ai-quick-chip:hover {
+  border-color: var(--color-accent);
+}
+.ai-quick-chip.active {
+  border-color: var(--color-accent);
+  background: rgba(37, 99, 235, 0.10);
+  font-weight: 600;
+}
+.ai-quick-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 0 5px;
+  border-radius: 8px;
+  background: #ECFDF5;
+  color: #059669;
+}
+.ai-quick-note {
+  font-size: 11.5px;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+  margin: 6px 0 0;
+}
+.ai-quick-keyrow {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.ai-quick-key {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: var(--color-text-primary);
+  background: var(--color-panel, #fff);
+  outline: none;
+}
+.ai-quick-key:focus {
+  border-color: var(--color-accent);
+}
+.ai-quick-error {
+  font-size: 12px;
+  color: #DC2626;
+  line-height: 1.55;
+  margin: 6px 0 0;
+}
+.ai-quick-hint {
+  font-size: 11.5px;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+  margin: 8px 0 0;
+}

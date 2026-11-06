@@ -1,0 +1,2 @@
+# 训练 prompt 快照：manifest 里的 SHA256 按 LF 计算，禁止 Git 自动改行尾
+scripts/distill/prompts/** text eol=lf

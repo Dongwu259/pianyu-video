@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <rect width="320" height="180" rx="8" fill="#F7FCFB"/>
+  <!-- 左侧：STEP 标签 + 大序号 + 步骤名 + 带序号圆标的要点 -->
+  <text x="36" y="52" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#0D9488" letter-spacing="5">STEP</text>
+  <text x="94" y="56" font-family="Arial, sans-serif" font-size="42" font-weight="800" fill="#0D9488">03</text>
+  <rect x="36" y="66" width="60" height="3" rx="1.5" fill="#0D9488" opacity="0.35"/>
+  <text x="36" y="94" font-family="Arial, sans-serif" font-size="24" font-weight="800" fill="#113B36">导出成片</text>
+  <circle cx="42" cy="116" r="9" fill="#0D9488" fill-opacity="0.12" stroke="#0D9488"/>
+  <text x="42" y="120" font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="#0D9488" text-anchor="middle">1</text>
+  <text x="58" y="120" font-family="Arial, sans-serif" font-size="13" fill="#134E4A">点击「渲染导出」</text>
+  <circle cx="42" cy="140" r="9" fill="#0D9488" fill-opacity="0.12" stroke="#0D9488"/>
+  <text x="42" y="144" font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="#0D9488" text-anchor="middle">2</text>
+  <text x="58" y="144" font-family="Arial, sans-serif" font-size="13" fill="#134E4A">选清晰度出片</text>
+  <!-- 右侧：操作画面画框 -->
+  <rect x="200" y="42" width="92" height="52" rx="6" fill="#0B1514"/>
+  <rect x="208" y="52" width="40" height="24" rx="3" fill="#2DD4BF" opacity="0.5"/>
+  <rect x="254" y="58" width="30" height="30" rx="3" fill="#5EEAD4" opacity="0.35"/>
+  <rect x="200" y="42" width="92" height="52" rx="6" fill="none" stroke="#0D9488" stroke-opacity="0.3" stroke-width="2"/>
+  <path d="M200 110 L292 110" stroke="#0D9488" stroke-opacity="0.2" stroke-width="2" stroke-dasharray="4 4"/>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <rect width="320" height="180" rx="8" fill="#0E1420"/>
+  <polygon points="40,0 280,0 168,86 152,86" fill="#0A0F18"/>
+  <polygon points="0,24 40,0 152,86 118,180 0,180" fill="#0D1320"/>
+  <polygon points="320,24 280,0 168,86 202,180 320,180" fill="#0D1320"/>
+  <polygon points="118,180 152,86 168,86 202,180" fill="#0A0F18"/>
+  <path d="M46,10 L158,88 M274,10 L162,88" stroke="#DDE9FF" stroke-width="2.4" opacity="0.8" fill="none"/>
+  <path d="M8,32 L126,92 M312,32 L194,92" stroke="#3B82F6" stroke-width="1.6" opacity="0.5" fill="none"/>
+  <g transform="translate(62,74) rotate(12)">
+    <rect x="-21" y="-14" width="42" height="29" rx="3" fill="#1B2333" stroke="#3B82F6" stroke-width="1.6"/>
+    <rect x="-17" y="-10" width="34" height="18" rx="1.5" fill="#2E4A86"/>
+    <rect x="-17" y="10" width="34" height="3.5" rx="1.5" fill="#0A0F18"/>
+    <polygon points="-21,-14 21,-14 0,-44" fill="#BFD4FF" opacity="0.10"/>
+  </g>
+  <g transform="translate(258,74) rotate(-12)">
+    <rect x="-21" y="-14" width="42" height="29" rx="3" fill="#1B2333" stroke="#3B82F6" stroke-width="1.6"/>
+    <rect x="-13" y="-5" width="26" height="4" rx="2" fill="#F5F8FF"/>
+    <rect x="-9" y="2.5" width="18" height="3" rx="1.5" fill="#7FA8FF"/>
+    <polygon points="-21,-14 21,-14 0,-44" fill="#BFD4FF" opacity="0.10"/>
+  </g>
+  <ellipse cx="62" cy="102" rx="26" ry="5" fill="#3B82F6" opacity="0.28"/>
+  <ellipse cx="258" cy="102" rx="26" ry="5" fill="#3B82F6" opacity="0.28"/>
+  <rect x="-21" y="15" width="42" height="13" rx="2" fill="#2E4A86" opacity="0.22" transform="translate(62,74) rotate(12)"/>
+</svg>

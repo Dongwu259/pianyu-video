@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <rect width="320" height="180" rx="8" fill="#F4F7FB"/>
+  <!-- 左侧竖构图出镜画框（微倾 + 描边 + 阴影示意） -->
+  <g transform="rotate(-2 78 90)">
+    <rect x="34" y="34" width="88" height="112" rx="8" fill="#1E293B"/>
+    <circle cx="78" cy="76" r="22" fill="#94A3B8"/>
+    <path d="M52 132 Q78 108 104 132 L104 146 L52 146 Z" fill="#64748B"/>
+    <rect x="34" y="34" width="88" height="112" rx="8" fill="none" stroke="#FFFFFF" stroke-opacity="0.6" stroke-width="2"/>
+  </g>
+  <!-- 右侧观点大字 + 要点 -->
+  <text x="142" y="72" font-family="Arial, sans-serif" font-size="26" font-weight="800" fill="#0F172A">先说结论</text>
+  <rect x="144" y="86" width="120" height="3" rx="1.5" fill="#4F46E5" opacity="0.4"/>
+  <circle cx="150" cy="108" r="4" fill="#4F46E5"/>
+  <text x="162" y="113" font-family="Arial, sans-serif" font-size="14" fill="#334155">论据一</text>
+  <circle cx="150" cy="132" r="4" fill="#4F46E5"/>
+  <text x="162" y="137" font-family="Arial, sans-serif" font-size="14" fill="#334155">论据二</text>
+  <!-- 右上角大引号装饰 -->
+  <text x="262" y="52" font-family="Georgia, serif" font-size="44" font-weight="800" fill="#4F46E5" opacity="0.18">”</text>
+</svg>

@@ -1,0 +1,107 @@
+/* ====== What's New Modal（更新内容弹窗，风格与 AboutModal 一致） ====== */
+
+.whats-new-modal {
+  padding: 0 0 20px;
+  max-width: 400px;
+  overflow: hidden;
+}
+
+/* 关闭按钮压在深色横幅上，改为浅色 */
+.whats-new-modal .modal-close {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.whats-new-modal .modal-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
+/* 顶部品牌区：渐变横幅 + Logo + 版本标题（复用 AboutModal 的视觉语言） */
+.whats-new-hero {
+  padding: 34px 36px 22px;
+  background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 55%, #4F46E5 100%);
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.whats-new-logo {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 14px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.25);
+}
+
+.whats-new-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.whats-new-subtitle {
+  font-size: 13px;
+  margin: 0;
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
+
+/* 亮点列表：图标 + 加粗标题 + 一行说明 */
+.whats-new-list {
+  list-style: none;
+  margin: 0;
+  padding: 18px 32px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.whats-new-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.whats-new-item-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-accent);
+}
+
+.whats-new-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 2px;
+}
+
+.whats-new-item-desc {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 底部主操作按钮：实心强调色，居中 */
+.whats-new-start-btn {
+  display: block;
+  margin: 18px auto 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: var(--color-accent);
+  border: none;
+  border-radius: 999px;
+  padding: 8px 36px;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.whats-new-start-btn:hover {
+  filter: brightness(1.08);
+}

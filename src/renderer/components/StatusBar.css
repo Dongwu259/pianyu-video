@@ -1,0 +1,44 @@
+/* StatusBar - 应用底部状态栏 */
+
+.app-statusbar {
+  height: 26px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  background: var(--color-panel);
+  border-top: 1px solid var(--color-border);
+  user-select: none;
+}
+
+.statusbar-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.statusbar-state.busy { color: var(--color-accent, #2563eb); }
+.statusbar-spin { animation: statusbar-spin 1s linear infinite; }
+@keyframes statusbar-spin { to { transform: rotate(360deg); } }
+
+.statusbar-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.statusbar-dirty {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #d97706;
+}
+.statusbar-project {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+}

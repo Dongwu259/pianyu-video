@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <rect width="320" height="180" rx="8" fill="#111827"/>
+  <!-- 四边飞入的卡片：中央一张到位，四周三张带速度线逼近 -->
+  <rect x="120" y="55" width="80" height="48" rx="6" fill="#F8FAFC"/>
+  <rect x="120" y="55" width="80" height="48" rx="6" fill="#2563EB" opacity="0.18"/>
+  <rect x="18" y="24" width="52" height="31" rx="5" fill="#F8FAFC" opacity="0.85" transform="rotate(-10 44 39)"/>
+  <rect x="76" y="38" width="26" height="3" rx="1.5" fill="#2563EB" opacity="0.8"/>
+  <rect x="250" y="118" width="52" height="31" rx="5" fill="#F8FAFC" opacity="0.85" transform="rotate(8 276 133)"/>
+  <rect x="216" y="132" width="26" height="3" rx="1.5" fill="#2563EB" opacity="0.8"/>
+  <rect x="238" y="18" width="46" height="27" rx="5" fill="#F8FAFC" opacity="0.6" transform="rotate(12 261 31)"/>
+  <rect x="36" y="126" width="46" height="27" rx="5" fill="#F8FAFC" opacity="0.6" transform="rotate(-6 59 139)"/>
+  <circle cx="160" cy="79" r="52" fill="none" stroke="#2563EB" stroke-width="2" opacity="0.35" stroke-dasharray="6 8"/>
+</svg>

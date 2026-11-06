@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preview</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #111827; font-family: -apple-system, 'PingFang SC', sans-serif; }
+    #root { width: 100%; height: 100%; position: relative; }
+    #loading {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; color: rgba(255,255,255,0.6); gap: 12px;
+    }
+    .spinner {
+      width: 32px; height: 32px; border: 3px solid rgba(255,255,255,0.2);
+      border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #error {
+      position: absolute; inset: 0; display: none; flex-direction: column;
+      align-items: center; justify-content: center; color: #fca5a5; gap: 8px; padding: 20px; text-align: center;
+    }
+
+    /* ====== 模板动画关键帧 ====== */
+    @keyframes slideInLeft {
+      from { transform: translateX(-60px) perspective(1200px) rotateY(15deg); opacity: 0; }
+      to { transform: translateX(0) perspective(1200px) rotateY(-10deg); opacity: 1; }
+    }
+    @keyframes slideOutRight {
+      from { transform: translateX(0) perspective(1200px) rotateY(-10deg); opacity: 1; }
+      to { transform: translateX(60px) perspective(1200px) rotateY(-15deg); opacity: 0; }
+    }
+    @keyframes flipIn {
+      0% { transform: perspective(1500px) rotateY(-90deg); opacity: 0; }
+      60% { transform: perspective(1500px) rotateY(5deg); opacity: 1; }
+      100% { transform: perspective(1500px) rotateY(0deg); opacity: 1; }
+    }
+    @keyframes floatSway {
+      0%, 100% { transform: perspective(2000px) rotateY(-5deg) translateY(0); }
+      50% { transform: perspective(2000px) rotateY(5deg) translateY(-8px); }
+    }
+    @keyframes fadeInUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      70% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes zoomPan {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15); }
+    }
+    @keyframes gridFade {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    @keyframes scrollUp {
+      from { transform: translateY(40%); }
+      to { transform: translateY(0); }
+    }
+    @keyframes splitSlide {
+      0% { transform: translateX(-30%); }
+      50% { transform: translateX(20%); }
+      100% { transform: translateX(0); }
+    }
+    @keyframes textSlideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes typewriter {
+      from { clip-path: inset(0 100% 0 0); }
+      to { clip-path: inset(0 0 0 0); }
+    }
+
+    /* 预览元素样式 */
+    .anim-frame {
+      position: absolute;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      color: #64748B; font-weight: 500;
+    }
+    .title-text {
+      position: absolute; font-weight: 700; color: #111827;
+      letter-spacing: -0.02em; line-height: 1.2;
+    }
+    .subtitle-text {
+      position: absolute; color: #6B7280; line-height: 1.5;
+    }
+    .brand-text {
+      position: absolute; font-weight: 600; color: #2563EB; letter-spacing: '0.05em';
+    }
+    .feature-item {
+      color: #374151; display: flex; align-items: center; gap: 4px;
+    }
+    .feature-number {
+      width: 18px; height: 18px; border-radius: 50%; background: #2563EB; color: white;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; flex-shrink: 0;
+    }
+    .play-btn {
+      width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.9);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .video-fallback {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #E2E8F0 0%, #CBD5E1 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: clamp(12px, 3vw, 24px); color: #64748B;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <div id="loading"><div class="spinner"></div><span>加载预览...</span></div>
+  <div id="error"><span>⚠️ 加载失败</span><p id="error-msg"></p></div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://esm.sh/react@18.3.1",
+      "react-dom": "https://esm.sh/react-dom@18.3.1",
+      "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+      "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import React from 'react';
+    import {createRoot} from 'react-dom/client';
+
+    const loading = document.getElementById('loading');
+    const errorDiv = document.getElementById('error');
+    const errorMsg = document.getElementById('error-msg');
+    const root = createRoot(document.getElementById('root'));
+
+    function showError(msg) {
+      console.error('[Preview]', msg);
+      if (loading) loading.style.display = 'none';
+      if (errorDiv) errorDiv.style.display = 'flex';
+      if (errorMsg) errorMsg.textContent = msg;
+    }
+
+    // 解析 URL 参数
+    const params = new URLSearchParams(window.location.search);
+    const orientation = params.get('orientation') || 'landscape';
+    const template = params.get('template') || 'RevealSlide';
+    const title = decodeURIComponent(params.get('title') || '');
+    const subtitle = decodeURIComponent(params.get('subtitle') || '');
+    const brandName = decodeURIComponent(params.get('brandName') || '');
+    let features = [];
+    try { features = JSON.parse(decodeURIComponent(params.get('features') || '[]')).filter(f => f.trim()).slice(0, 4); } catch {}
+    const videoCount = parseInt(params.get('videoCount') || '0');
+    const duration = parseFloat(params.get('duration') || '8');
+    const loop = params.get('loop') === '1';
+
+    /* ====== 模板渲染器 ====== */
+    const templateRenderers = {
+      // 模板 1: 3D 倾斜平推 (RevealSlide)
+      RevealSlide: () => React.createElement('div', {
+        style: { width: '100%', height: '100%', position: 'relative', overflow: 'hidden',
+                background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 50%, #F1F5F9 100%)' }
+      },
+        // 主视频帧 — 从左侧滑入
+        React.createElement('div', { className: 'anim-frame',
+          style: { left: '6%', top: '14%', width: '64%', height: '48%',
+                  background: 'linear-gradient(135deg, #E2E8F0 0%, #CBD5E1 100%)',
+                  boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+                  zIndex: 2, animation: `slideInLeft 0.8s ease-out forwards, slideOutRight 0.8s ease-in ${duration - 0.8}s forwards`,
+                  transformOrigin: 'left center' }},
+          React.createElement('div', { className: 'video-fallback' },
+            videoCount > 0 ? `🎬 视频 1` : '🎬 视频占位')
+        ),
+        // 标题 — 淡入上滑
+        React.createElement('div', { className: 'title-text',
+          style: { bottom: '18%', left: 0, right: 0, textAlign: 'center',
+                  fontSize: 'clamp(16px, 4vw, 48px)',
+                  animation: 'fadeInUp 0.6s ease-out 0.4s both' }},
+          title || '主标题'
+        ),
+        // 副标题
+        subtitle && React.createElement('div', { className: 'subtitle-text',
+          style: { bottom: '10%', left: 0, right: 0, textAlign: 'center',
+                  fontSize: 'clamp(10px, 2vw, 24px)',
+                  animation: 'fadeInUp 0.6s ease-out 0.6s both' }},
+          subtitle
+        ),
+        // 品牌名
+        brandName && React.createElement('div', { className: 'brand-text',
+          style: { top: 12, left: 0, right: 0, textAlign: 'center',
+                  fontSize: 'clamp(8px, 1.5vw, 18px)',
+                  animation: 'fadeInUp 0.5s ease-out 0.8s both' }},
+          brandName
+        )
+      ),
+
+      // 模板 2: 卡片堆叠翻转 (StackCards)
+      StackCards: () => React.createElement('div', {
+        style: { width: '100%', height: '100%', position: 'relative', overflow: 'hidden',
+                background: 'linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 50%, #C7D2FE 100%)' }
+      },
+        // 背景卡片 1
+        React.createElement('div', { className: 'anim-frame',
+          style: { left: '15%', top: '20%', width: '55%', height: '42%',
+                  background: 'linear-gradient(135deg, #C7D2FE 0%, #A5B4FC 100%)',
+                  opacity: 0.5, zIndex: 1, transform: 'perspective(1500px) rotateY(8deg) scale(0.9)',
+                  animation: `flipIn 0.7s ease-out ${duration - 1}s forwards` }},
+          React.createElement('div', { className: 'video-fallback',
+            style: { background: 'linear-gradient(135deg, #C7D2FE 0%, #A5B4FC 100%)' } },
+            '')
+        ),
+        // 主卡片 — 翻转进入
+        React.createElement('div', { className: 'anim-frame',
+          style: { left: '10%', top: '15%', width: '60%', height: '48%',
+                  background: 'linear-gradient(135deg, #818CF8 0%, #6366F1 100%)',
+                  boxShadow: '0 30px 60px -12px rgba(99,102,241,0.4)',
+                  zIndex: 3, animation: 'flipIn 0.8s ease-out forwards',
+                  transformOrigin: 'center center' }},
+          React.createElement('div', { className: 'video-fallback',
+            style: { background: 'linear-gradient(135deg, #818CF8 0%, #6366F1 100%)', color: 'white' } },
+            videoCount > 0 ? '🎬 视频 1' : '🎬 视频占位')
+        ),
+        // 功能要点 — 弹入
+        React.createElement('div', { style: { position: 'absolute', bottom: '8%', left: '10%', right: '10%', zIndex: 5 }},
+          features.slice(0, 2).map((f, i) =>
+            React.createElement('div', { className: 'feature-item',
+              key: i, style: { fontSize: 'clamp(8px, 1.5vw, 16px)',
+                                animation: `popIn 0.4s ease-out ${0.6 + i * 0.2}s both`,
+                                marginBottom: 4 } },
+              React.createElement('span', { className: 'feature-number' }, i + 1),
+              f
+            )
+          )
+        )
+      ),
+
+      // 模板 3: 电影感环绕运镜 (CinematicPan)
+      CinematicPan: () => React.createElement('div', {
+        style: { width: '100%', height: '100%', position: 'relative', overflow: 'hidden',
+                background: 'linear-gradient(135deg, #1F2937 0%, #111827 50%, #0F172A 100%)' }
+      },
+        // 视频帧 — 缓慢漂浮摆动
+        React.createElement('div', { className: 'anim-frame',
+          style: { left: '10%', top: '12%', width: '80%', height: '50%',
+                  background: 'linear-gradient(135deg, #374151 0%, #1F2937 100%)',
+                  boxShadow: '0 0 80px rgba(59,130,246,0.15), 0 25px 50px rgba(0,0,0,0.5)',
+                  zIndex: 2, animation: `popIn 1s ease-out forwards, floatSway ${duration * 0.6}s ease-in-out 1s infinite`,
+                  transformOrigin: 'center center' }},
+          React.createElement('div', { className: 'video-fallback',
+            style: { background: 'linear-gradient(135deg, #374151 0%, #1F2937 100%)', color: '#9CA3AF' } },
+            videoCount > 0 ? '🎬 视频 1' : '🎬 视频占位')
+        ),
+        // 功能文字 — 淡入
+        React.createElement('div', { style: { position: 'absolute', bottom: '14%', left: '10%', right: '10%', zIndex: 5,
+                animation: 'fadeInUp 0.8s ease-out 0.5s both' }},
+          React.createElement('div', { style: { color: '#9CA3AF', fontSize: 'clamp(8px, 1.5vw, 16px)', textAlign: 'center',
+                  animation: 'typewriter 1.5s steps(30) 0.8s both' }},
+            features.length > 0 ? features[0] : (subtitle || '电影感运镜')
+          )
+        ),
+        // 品牌名 — 白色
+        brandName && React.createElement('div', { className: 'brand-text',
+          style: { top: 14, left: 0, right: 0, textAlign: 'center',
+                  color: 'rgba(255,255,255,0.7)', fontSize: 'clamp(8px, 1.5vw, 18px)',
+                  animation: 'fadeInUp 0.5s ease-out 1s both' }},
+          brandName
+        )
+      ),
+
+      // 模板 4: 分屏对比展示 (SplitShowcase)
+      SplitShowcase: () => React.createElement('div', {
+        style: { width: '100%', height: '100%', position: 'relative', overflow: 'hidden',
+                background: '#FFFFFF' }
+      },
+        // 左侧视频区
+        React.createElement('div', { className: 'anim-frame',
+          style: { left: '4%', top: '10%', width: '48%', height: '60%',
+                  background: 'linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 100%)',
+                  boxShadow: '0 20px 40px -12px rgba(0,0,0,0.15)',
+                  zIndex: 2, animation: 'slideInLeft 0.7s ease-out forwards' }},
+          React.createElement('div', { className: 'video-fallback' },
+            videoCount > 0 ? '🎬 视频 1' : '🎬 视频占位')
+        ),
+        // 右侧文字区
+        React.createElement('div', { style: { position: 'absolute', right: '5%', top: '15%', width: '42%', zIndex: 3 }},
+          React.createElement('div', { className: 'title-text', style: { fontSize: 'clamp(14px, 3vw, 36px)',
+                  position: 'static', marginBottom: 8, animation: 'fadeInUp 0.6s ease-out 0.4s both' }},
+            title || '功能亮点'
+          ),
+          React.createElement('div', { className: 'subtitle-text', style: { fontSize: 'clamp(8px, 1.4vw, 16px)',
+                  position: 'static', animation: 'fadeInUp 0.6s ease-out 0.6s both' }},
+            subtitle || '一边展示操作，一边讲解功能'
+          ),
+          features.slice(0, 3).map((f, i) =>
+            React.createElement('div', { className: 'feature-item', key: i,
+              style: { fontSize: 'clamp(7px, 1.2vw, 14px)', color: '#374151',
+                      animation: `fadeInUp 0.5s ease-out ${0.8 + i * 0.15}s both`,
+                      marginTop: 6 } },
+              React.createElement('span', { style: { color: '#2563EB', fontWeight: 700 } }, '✦  '),
+              f
+            )
+          )
+        )
+      ),
+
+      // 模板 5: 极简悬浮展示 (MinimalFloat)
+      MinimalFloat: () => React.createElement('div', {
+        style: { width: '100%', height: '100%', position: 'relative', overflow: 'hidden',
+                background: '#FFFFFF' }
+      },
+        // 中央视频 — 轻微倾斜悬浮
+        React.createElement('div', { className: 'anim-frame',
+          style: { left: '15%', top: '18%', width: '70%', height: '40%',
+                  background: 'linear-gradient(135deg, #F8F9FA 0%, #F1F5F9 100%)',
+                  boxShadow: '0 30px 60px -15px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04)',
+                  transform: 'perspective(1800px) rotateX(3deg) rotateY(-6deg)',
+                  zIndex: 2, animation: 'popIn 0.8s ease-out forwards' }},
+          React.createElement('div', { className: 'video-fallback',
+            style: { background: 'linear-gradient(135deg, #F8F9FA 0%, #F1F5F9 100%)' } },
+            videoCount > 0 ? '🎬 视频 1' : '🎬 视频占位')
+        ),
+        // 底部极简标语
+        React.createElement('div', { className: 'title-text',
+          style: { bottom: '15%', left: 0, right: 0, textAlign: 'center',
+                  fontWeight: 300, color: '#111827', fontSize: 'clamp(14px, 3vw, 36px)',
+                  animation: 'fadeInUp 0.8s ease-out 0.5s both' }},
+          title || '极简美学'
+        ),
+        brandName && React.createElement('div', { style: { position: 'absolute', bottom: '8%', left: 0, right: 0,
+                textAlign: 'center', fontSize: 'clamp(7px, 1.2vw, 14px)', color: '#9CA3AF',
+                fontWeight: 600, letterSpacing: '0.1em', animation: 'fadeInUp 0.5s ease-out 0.8s both' }},
+          brandName
+        )
+      ),
+
+      // 模板 6: Ken Burns 推拉镜头
+      KenBurns: () => React.createElement('div', {
+        style: { width: '100%', height: '100%', position: 'relative', overflow: 'hidden',
+                background: '#0F172A' }
+      },
+        // 视频 — 缓慢推拉缩放
+        React.createElement('div', { className: 'anim-frame',
+          style: { left: 0, top: 0, width: '100%', height: '100%',
+                  background: 'linear-gradient(135deg, #1E293B 0%, #0F172A 100%)',
+                  zIndex: 1, transformOrigin: 'center 60%',
+                  animation: `zoomPan ${duration}s ease-in-out forwards` }},
+          React.createElement('div', { className: 'video-fallback',
+            style: { background: 'linear-gradient(135deg, #1E293B 0%, #0F172A 100%)', color: '#64748B' } },
+            videoCount > 0 ? '🎬 视频 1' : '🎬 视频占位')
+        ),
+        // 底部文字渐变浮现
+        React.createElement('div', { style: { position: 'absolute', bottom: 0, left: 0, right: 0,
+                padding: '40px 20px 20px',
+                background: 'linear-gradient(transparent, rgba(0,0,0,0.7))', zIndex: 3 }},
+          React.createElement('div', { style: { color: 'white', fontSize: 'clamp(14px, 3vw, 32px)',
+                  fontWeight: 700, animation: 'fadeInUp 0.8s ease-out 0.5s both' }},
+            title || '推拉镜头'
+          ),
+          subtitle && React.createElement('div', { style: { color: 'rgba(255,255,255,0.6)',
+                  fontSize: 'clamp(8px, 1.5vw, 16px)', marginTop: 4,
+                  animation: 'fadeInUp 0.6s ease-out 0.8s both' }}, subtitle)
+        )
+      ),
+
+      // 模板 7: 网格拼图 (GridMosaic)
+      GridMosaic: () => React.createElement('div', {
+        style: { width: '100%', height: '100%', position: 'relative', overflow: 'hidden',
+                background: '#F8F9FA' }
+      },
+        // 2x2 网格
+        ...Array.from({length: 4}, (_, i) => {
+          const row = Math.floor(i / 2), col = i % 2;
+          const colors = [
+            'linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%)',
+            'linear-gradient(135deg, #FCE7F3 0%, #FBCFE8 100%)',
+            'linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%)',
+            'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)'
+          ];
+          return React.createElement('div', { className: 'anim-frame',
+            key: i,
+            style: { left: `${5 + col * 48}%`, top: `${12 + row * 42}%`, width: '43%', height: '35%',
+                    background: colors[i], borderRadius: '10px',
+                    boxShadow: '0 12px 24px -8px rgba(0,0,0,0.12)',
+                    animation: `gridFade 0.5s ease-out ${i * 0.15}s both`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center' }},
+            React.createElement('div', { style: { color: 'rgba(0,0,0,0.4)', fontWeight: 600,
+                    fontSize: 'clamp(8px, 1.5vw, 16px)' } },
+              videoCount > i ? `🎬 视频 ${i + 1}` : `占位 ${i + 1}`)
+          );
+        })
+      ),
+
+      // 模板 8: 竖屏滚动文字卡 (VerticalScroll)
+      VerticalScroll: () => React.createElement('div', {
+        style: { width: '100%', height: '100%', position: 'relative', overflow: 'hidden',
+                background: 'linear-gradient(135deg, #1F2937 0%, #111827 100%)' }
+      },
+        // 模糊视频背景
+        React.createElement('div', { style: { position: 'absolute', inset: 0,
+                background: 'linear-gradient(135deg, #374151 0%, #1F2937 100%)', zIndex: 1,
+                filter: 'blur(2px)', opacity: 0.6 } }),
+        // 白色文字卡片 — 从下方滚入
+        React.createElement('div', { style: { position: 'absolute', left: '8%', right: '8%',
+                top: '15%', padding: '16px 14px', background: 'rgba(255,255,255,0.95)',
+                borderRadius: 16, boxShadow: '0 20px 60px rgba(0,0,0,0.3)', zIndex: 3,
+                animation: `scrollUp 1s ease-out forwards` }},
+          React.createElement('div', { style: { fontSize: 'clamp(12px, 2.5vw, 24px)', fontWeight: 800,
+                  color: '#111827', marginBottom: 6 } },
+            title || '竖屏滚动'
+          ),
+          subtitle && React.createElement('div', { style: { fontSize: 'clamp(8px, 1.3vw, 14px)',
+                  color: '#6B7280', marginBottom: 8 } }, subtitle),
+          features.slice(0, 3).map((f, i) =>
+            React.createElement('div', { className: 'feature-item', key: i,
+              style: { fontSize: 'clamp(7px, 1.2vw, 13px)', color: '#374151',
+                      padding: '4px 0', borderBottom: i < features.length - 1 ? '1px solid #E5E7EB' : 'none' } },
+              React.createElement('span', { className: 'feature-number' }, i + 1), f
+            )
+          )
+        ),
+        // 品牌名
+        brandName && React.createElement('div', { style: { position: 'absolute', bottom: 12,
+                left: 0, right: 0, textAlign: 'center', color: 'rgba(255,255,255,0.5)',
+                fontSize: 'clamp(7px, 1.2vw, 14px)', fontWeight: 600, zIndex: 5,
+                letterSpacing: '0.1em' } }, brandName)
+      ),
+
+      // 模板 9: 分屏对比切换 (SplitCompare)
+      SplitCompare: () => React.createElement('div', {
+        style: { width: '100%', height: '100%', position: 'relative', overflow: 'hidden',
+                background: '#FFFFFF' }
+      },
+        // 左侧 — 蓝色
+        React.createElement('div', { style: { position: 'absolute', left: 0, top: 0, width: '50%', height: '100%',
+                background: 'linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%)', zIndex: 1,
+                animation: `splitSlide ${duration * 0.4}s ease-out forwards` }},
+          React.createElement('div', { style: { position: 'absolute', left: '15%', top: '35%', width: '70%', height: '30%',
+                    background: 'rgba(59,130,246,0.2)', borderRadius: 10,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center' } },
+            React.createElement('span', { style: { color: '#2563EB', fontWeight: 600,
+                    fontSize: 'clamp(8px, 1.5vw, 16px)' } },
+              videoCount > 0 ? '🎬 A' : 'A')
+          )
+        ),
+        // 右侧 — 粉色
+        React.createElement('div', { style: { position: 'absolute', right: 0, top: 0, width: '50%', height: '100%',
+                background: 'linear-gradient(135deg, #FCE7F3 0%, #FBCFE8 100%)', zIndex: 1 }},
+          React.createElement('div', { style: { position: 'absolute', left: '15%', top: '35%', width: '70%', height: '30%',
+                    background: 'rgba(236,72,153,0.2)', borderRadius: 10,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center' } },
+            React.createElement('span', { style: { color: '#DB2777', fontWeight: 600,
+                    fontSize: 'clamp(8px, 1.5vw, 16px)' } },
+              videoCount > 1 ? '🎬 B' : 'B')
+          )
+        ),
+        // 中间分屏线
+        React.createElement('div', { style: { position: 'absolute', left: '48%', top: 0, width: 3, height: '100%',
+                background: 'white', zIndex: 4, boxShadow: '0 0 8px rgba(0,0,0,0.2)' } }),
+        // 中心手柄
+        React.createElement('div', { style: { position: 'absolute', left: '45%', top: '45%', width: 36, height: 36,
+                borderRadius: '50%', background: 'white', zIndex: 5,
+                boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 } },
+          '⇔'
+        ),
+        // 顶部文字
+        React.createElement('div', { style: { position: 'absolute', top: 14, left: 0, right: 0,
+                textAlign: 'center', zIndex: 6, animation: 'fadeInUp 0.6s ease-out 0.3s both' }},
+          React.createElement('div', { style: { fontSize: 'clamp(10px, 2vw, 22px)', fontWeight: 700,
+                  color: '#111827' } }, title || '对比展示')
+        ),
+        // 对比要点
+        features.slice(0, 2).map((f, i) =>
+          React.createElement('div', { key: i, style: { position: 'absolute',
+                  left: i === 0 ? '8%' : '58%', bottom: '12%', zIndex: 6,
+                  padding: '4px 10px', borderRadius: 20,
+                  background: i === 0 ? '#2563EB' : '#DB2777', color: 'white',
+                  fontSize: 'clamp(6px, 1vw, 12px)', fontWeight: 600,
+                  animation: `popIn 0.4s ease-out ${0.6 + i * 0.2}s both` } }, f)
+        )
+      )
+    };
+
+    /* ====== 渲染逻辑 ====== */
+    let loopTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    function renderPreview() {
+      try {
+        // 清除之前的循环定时器
+        if (loopTimeout) {
+          clearTimeout(loopTimeout);
+          loopTimeout = null;
+        }
+
+        const renderer = templateRenderers[template] || templateRenderers.RevealSlide;
+        const element = renderer();
+        root.render(element);
+        if (loading) loading.style.display = 'none';
+
+        // 循环播放或播放一遍后重播：duration 秒后重新渲染（触发动画重播）
+        const loopMs = (duration * 1000) + 500;
+        if (loop) {
+          // 循环模式：定时重播
+          loopTimeout = setTimeout(() => {
+            if (root) {
+              try { renderPreview(); } catch {}
+            }
+          }, loopMs);
+        }
+        // 播放一遍模式：不自动重播，用户可以点击「重播」按钮
+      } catch (err) {
+        showError(err.message || String(err));
+      }
+    }
+
+    renderPreview();
+  </script>
+</body>
+</html>

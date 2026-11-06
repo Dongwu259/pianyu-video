@@ -1,0 +1,40 @@
+/* 模板卡 hover 动态预览弹层（portal 到 body；pointer-events:none 永不挡点击） */
+.thp-pop {
+  position: fixed;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-panel, #fff);
+  border: 1px solid var(--color-accent, #2563eb);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.22);
+  pointer-events: none;
+}
+.thp-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 10px 5px;
+}
+.thp-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-text-primary, #111);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.thp-meta {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--color-text-secondary, #666);
+}
+.thp-player {
+  width: 100%;
+}
+.thp-player .preview-player-container {
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,255 @@
+/* ====== About Modal（商业化风格） ====== */
+
+.about-modal {
+  padding: 0 0 20px;
+  max-width: 400px;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* 关闭按钮压在深色横幅上，改为浅色 */
+.about-modal .modal-close {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.about-modal .modal-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
+/* 顶部品牌区：渐变横幅 + Logo + 产品名 */
+.about-hero {
+  padding: 34px 36px 22px;
+  background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 55%, #4F46E5 100%);
+  color: #FFFFFF;
+}
+
+.about-logo {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 14px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.25);
+}
+
+.about-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.about-version-pill {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.about-tagline {
+  font-size: 13px;
+  margin: 0;
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
+
+/* 产品简介 */
+.about-description {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin: 0;
+  padding: 18px 32px 4px;
+}
+
+.about-divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 16px 32px;
+}
+
+/* 信息区 */
+.about-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 32px;
+  margin-bottom: 18px;
+}
+
+.about-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.about-label {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.about-value {
+  font-size: 13px;
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.about-coming-soon {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+/* 外链按钮：药丸样式 */
+.about-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-accent);
+  background: var(--color-accent-light);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.about-link:hover {
+  background: #DBEAFE;
+  border-color: #BFDBFE;
+}
+
+:root[data-theme='dark'] .about-link:hover {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.45);
+}
+
+.about-link-ext {
+  opacity: 0.6;
+}
+
+/* 更新区：检查更新按钮 + 结果文案（仅打包直链版渲染） */
+.about-update {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0 32px;
+  margin-bottom: 18px;
+}
+
+.about-update-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 药丸按钮，与 .about-link 同族 */
+.about-update-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-accent);
+  background: var(--color-accent-light);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.about-update-btn:hover:not(:disabled) {
+  background: #DBEAFE;
+  border-color: #BFDBFE;
+}
+
+:root[data-theme='dark'] .about-update-btn:hover:not(:disabled) {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.45);
+}
+
+.about-update-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* 主操作（重启安装）：实心强调色 */
+.about-update-btn-primary {
+  color: #FFFFFF;
+  background: var(--color-accent);
+}
+
+.about-update-btn-primary:hover:not(:disabled) {
+  background: var(--color-accent);
+  border-color: transparent;
+  filter: brightness(1.08);
+}
+
+/* 检查中转圈 */
+.about-spin {
+  animation: about-spin 1s linear infinite;
+}
+
+@keyframes about-spin {
+  to { transform: rotate(360deg); }
+}
+
+.about-update-status {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* 法律入口链接行 */
+.about-legal-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 32px 14px;
+}
+
+.about-legal-links button {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  background: transparent;
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+}
+
+.about-legal-links button:hover {
+  color: var(--color-accent);
+}
+
+.about-legal-sep {
+  width: 1px;
+  height: 10px;
+  background: var(--color-border);
+}
+
+/* 页脚 */
+.about-footer {
+  padding-top: 14px;
+  margin: 0 32px;
+  border-top: 1px solid var(--color-border);
+}
+
+.about-footer p {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  margin: 0;
+}

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <rect width="320" height="180" rx="8" fill="#16162A"/>
+  <circle cx="160" cy="84" r="58" fill="none" stroke="#2563EB" stroke-opacity="0.25"/>
+  <ellipse cx="160" cy="84" rx="58" ry="20" fill="none" stroke="#2563EB" stroke-opacity="0.12"/>
+  <ellipse cx="160" cy="84" rx="20" ry="58" fill="none" stroke="#2563EB" stroke-opacity="0.12"/>
+  <g fill="#8FA3C8">
+    <circle cx="118" cy="46" r="1.8"/><circle cx="132" cy="38" r="1.8"/><circle cx="148" cy="32" r="1.8"/>
+    <circle cx="166" cy="29" r="1.8"/><circle cx="184" cy="31" r="1.8"/><circle cx="200" cy="38" r="1.8"/>
+    <circle cx="106" cy="62" r="1.8"/><circle cx="102" cy="82" r="1.8"/><circle cx="106" cy="100" r="1.8"/>
+    <circle cx="118" cy="116" r="1.8"/><circle cx="136" cy="126" r="1.8"/><circle cx="156" cy="131" r="1.8"/>
+    <circle cx="176" cy="129" r="1.8"/><circle cx="194" cy="122" r="1.8"/><circle cx="208" cy="108" r="1.8"/>
+    <circle cx="214" cy="90" r="1.8"/><circle cx="212" cy="70" r="1.8"/><circle cx="204" cy="52" r="1.8"/>
+    <circle cx="132" cy="60" r="1.6"/><circle cx="148" cy="52" r="1.6"/><circle cx="166" cy="48" r="1.6"/>
+    <circle cx="186" cy="52" r="1.6"/><circle cx="124" cy="80" r="1.6"/><circle cx="128" cy="100" r="1.6"/>
+    <circle cx="146" cy="112" r="1.6"/><circle cx="178" cy="110" r="1.6"/><circle cx="196" cy="94" r="1.6"/>
+    <circle cx="144" cy="72" r="1.4"/><circle cx="160" cy="66" r="1.4"/><circle cx="176" cy="72" r="1.4"/>
+    <circle cx="148" cy="92" r="1.4"/><circle cx="164" cy="98" r="1.4"/>
+  </g>
+  <circle cx="192" cy="58" r="3.5" fill="#2563EB"/>
+  <circle cx="192" cy="58" r="8.5" fill="none" stroke="#2563EB" stroke-opacity="0.5"/>
+  <circle cx="124" cy="104" r="3.5" fill="#2563EB"/>
+  <circle cx="124" cy="104" r="8.5" fill="none" stroke="#2563EB" stroke-opacity="0.5"/>
+  <circle cx="174" cy="114" r="3" fill="#7C3AED"/>
+  <circle cx="174" cy="114" r="7.5" fill="none" stroke="#7C3AED" stroke-opacity="0.5"/>
+  <rect x="72" y="148" width="70" height="17" rx="8.5" fill="#2563EB" opacity="0.18"/>
+  <rect x="80" y="153.5" width="34" height="6" rx="3" fill="#93C5FD"/>
+  <rect x="150" y="148" width="82" height="17" rx="8.5" fill="#2563EB" opacity="0.18"/>
+  <rect x="158" y="153.5" width="46" height="6" rx="3" fill="#93C5FD"/>
+</svg>
