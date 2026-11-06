@@ -1,8 +1,9 @@
 /**
- * Watermark - 免费版水印层
+ * Watermark - 曾经的免费版水印层（2026-11-06 起默认不渲染）
  *
- * 未授权（免费版）导出/预览时叠加在画面右下角的半透明角标；
- * 授权版（licensed !== false）不渲染。
+ * 开源转型后编辑器不设限制：main/ipc/render.ts 恒注入 licensed=true（EDITOR_UNRESTRICTED），
+ * 本组件因此不会出现在成片里。保留代码是为将来「可选品牌角标」留实现，
+ * 不要把 licensed=false 当成可达状态来理解。
  * 尺寸随画布宽度等比缩放（getScaledTokens），竖屏/方形画布自动缩小。
  */
 

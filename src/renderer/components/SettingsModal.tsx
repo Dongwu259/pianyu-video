@@ -509,7 +509,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({onClose, initialSec
             </button>
           </div>
 
-          {/* 片语本地模型入口（付费版：8 元解锁本地不限 token；检测显存/下载权重） */}
+          {/* 片语本地模型入口（专有模型：订阅 ¥6/月 可下载本地不限 token；检测显存/下载权重） */}
           {onOpenLocalModel && (
             <div className="settings-mcp-note local-model">
               <span>

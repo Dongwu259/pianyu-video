@@ -6,7 +6,8 @@
  * - verifyIfNeeded: 距上次校验超过 7 天时联网复核（服务器滑动续期，返回新 token 需持久化）；
  *   网络失败按「离线」处理，保留当前状态
  * - getEntitlement: token 在、未过期、且离线未超过 30 天宽限期 → 'licensed'，否则 'free'
- * - 免费版的限制（水印 + 分辨率钳制）在 main/index.ts 的 RENDER_START 门禁强制执行
+ * - 授权只用于「专有资产」：模型权重下载 / 模板包。编辑器本体不设限制
+ *   （2026-11-06 开源转型后 EDITOR_UNRESTRICTED=true，水印与 720p 钳制已停用，见 shared/editor-policy.ts）
  *
  * 服务器接口契约见 server/src/routes/license.ts。
  */

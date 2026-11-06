@@ -1,5 +1,5 @@
 /**
- * LocalModelModal - 片语本地模型弹窗（付费版专属：8 元解锁，本地不限 token）
+ * LocalModelModal - 片语本地模型弹窗（专有模型：订阅 ¥6/月 后下载，本地不限 token）
  *
  * 触发：①首次激活成功（LicenseModal onActivated）②付费版启动且未做过决策
  * （App.tsx 延迟弹，localStorage 记决策）③设置页 AI 区入口。
