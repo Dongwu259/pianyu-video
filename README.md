@@ -4,7 +4,9 @@
 
 > English: Pianyu is an open-source, local-first AI video editor for Windows. You describe the result in one sentence; a fine-tuned on-device model drives 29 editing tools to produce the cut. Footage and model stay on your machine.
 
-<!-- DEMO: 30 秒演示 GIF 放这里（README 首屏决定 80% 的点击） -->
+![片语演示：用一句话描述需求，AI 完成分镜、裁剪、文案与配乐](assets/demo.gif)
+
+> 上面这支片子和片子里演示的每条剪辑，都是片语自己剪出来的。
 
 ---
 
